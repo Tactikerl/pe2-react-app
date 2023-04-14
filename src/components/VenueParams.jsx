@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import DisplayVenues from "./DisplayVenue";
+import DisplayVenues from "./DisplayVenues";
 
-const url = `https://nf-api.onrender.com/api/v1/holidaze/venues`;
+const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
 const VenueParams = () => {
   const [fetchVenues, setFetchVenues] = useState([]);
@@ -64,9 +64,10 @@ const VenueParams = () => {
           )
           .map((venue) => (
             <DisplayVenues
+              id={venue.id}
               key={venue.id}
               name={venue.name}
-              owner={venue.owner}
+              owner={venue.owner.name}
               description={venue.description}
               maxGuests={venue.maxGuests}
               price={venue.price}
