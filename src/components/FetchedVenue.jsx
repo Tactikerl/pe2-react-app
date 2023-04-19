@@ -26,8 +26,6 @@ const FetchedVenue = () => {
     );
     const json = await res.json();
     setFetchedVenue(json);
-    console.log(json);
-    console.log;
   }
 
   // const reserved = [
@@ -67,14 +65,10 @@ const FetchedVenue = () => {
 
       {fetchedVenue.bookings && (
         <Calendar
+          classNamePrefix="calendar"
           selected={selectedDates}
           onChange={handleChange}
           onOverbook={(e, err) => alert(err)}
-          components={{
-            DayCellFooter: ({ innerProps }) => (
-              <div {...innerProps}>My custom day footer</div>
-            ),
-          }}
           disabled={(date, state) => !state.isSameMonth}
           reserved={[
             {
