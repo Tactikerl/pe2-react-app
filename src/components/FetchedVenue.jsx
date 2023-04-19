@@ -3,12 +3,6 @@ import { useParams } from "react-router-dom";
 import ViewVenue from "./ViewVenue";
 import Calendar from "@demark-pro/react-booking-calendar";
 
-const reserved = [
-  {
-    startDate: new Date(2023, 3, 22),
-    endDate: new Date(2016, 4, 5),
-  },
-];
 
 const FetchedVenue = () => {
   const [selectedDates, setSelectedDates] = useState([]);
@@ -28,12 +22,7 @@ const FetchedVenue = () => {
     setFetchedVenue(json);
   }
 
-  // const reserved = [
-  //   {
-  //     startDate: fetchedVenue.bookings[0].dateFrom,
-  //     endDate: fetchedVenue.bookings[0].dateTo,
-  //   },
-  // ];
+ 
 
   return (
     <div>
@@ -47,21 +36,7 @@ const FetchedVenue = () => {
         maxGuests={fetchedVenue.maxGuests}
         price={fetchedVenue.price}
       />
-      {/* <Calendar
-        selected={selectedDates}
-        onChange={handleChange}
-        onOverbook={(e, err) => alert(err)}
-        components={{
-          DayCellFooter: ({ innerProps }) => (
-            <div {...innerProps}>My custom day footer</div>
-          ),
-        }}
-        disabled={(date, state) => !state.isSameMonth}
-        reserved={reserved}
-        variant="events"
-        dateFnsOptions={{ weekStartsOn: 1 }}
-        range={true}
-      /> */}
+    
 
       {fetchedVenue.bookings && (
         <Calendar
@@ -70,12 +45,16 @@ const FetchedVenue = () => {
           onChange={handleChange}
           onOverbook={(e, err) => alert(err)}
           disabled={(date, state) => !state.isSameMonth}
-          reserved={[
-            {
-              startDate: new Date(fetchedVenue.bookings[0].dateFrom),
-              endDate: new Date(fetchedVenue.bookings[0].dateTo),
-            },
-          ]}
+          reserved={(fetchedVenue.bookings.map(() => { 
+
+          }))
+            // [
+            // {
+            //   startDate: new Date(fetchedVenue.bookings[0].dateFrom),
+            //   endDate: new Date(fetchedVenue.bookings[0].dateTo),
+            // },
+          // ]
+        }
           variant="events"
           dateFnsOptions={{ weekStartsOn: 1 }}
           range={true}
