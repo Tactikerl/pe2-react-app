@@ -3,7 +3,7 @@ import { useState } from "react";
 const UserRegister = () => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = "";
+  const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -16,13 +16,16 @@ const UserRegister = () => {
     };
 
     try {
-      const res = await fetch("", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const res = await fetch(
+        "https://nf-api.onrender.com/api/v1/holidaze/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (!res.ok) {
         throw Error(`HTTP error! status: ${res.status}`);
@@ -44,6 +47,7 @@ const UserRegister = () => {
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
+            placeholder="Your user name"
           />
         </label>
         <label htmlFor="email">
@@ -52,6 +56,7 @@ const UserRegister = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your Email"
           />
         </label>
         <label htmlFor="password">
@@ -60,14 +65,17 @@ const UserRegister = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Your password"
           />
         </label>
         <label htmlFor="admin">
           <input
+            id="admin"
             type="checkbox"
             checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.value)}
+            onChange={() => setIsAdmin(!isAdmin)}
           />
+          Check box if VenueAdmin
         </label>
         <button type="submit">Register</button>
       </form>

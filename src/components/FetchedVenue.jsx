@@ -1,14 +1,29 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
 import ViewVenue from "./ViewVenue";
-import Calendar from "@demark-pro/react-booking-calendar";
-
+import { DateRange } from "react-date-range";
 
 const FetchedVenue = () => {
-  const [selectedDates, setSelectedDates] = useState([]);
-  const handleChange = (e) => setSelectedDates(e);
+  // const [selectedDates, setSelectedDates] = useState([]);
+  // const handleChange = (e) => setSelectedDates(e);
   const { id } = useParams();
   const [fetchedVenue, setFetchedVenue] = useState({});
+  const [booking, setBooking] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: null,
+      key: "selection",
+    },
+  ]);
 
   useEffect(() => {
     requestFetchedVenue(id);
@@ -20,9 +35,37 @@ const FetchedVenue = () => {
     );
     const json = await res.json();
     setFetchedVenue(json);
+
+    let bookings = json.bookings.map((booking) => {
+      return {
+        startDate: new Date(booking.dateFrom),
+        endDate: new Date(booking.dateTo),
+        disabled: true,
+      };
+    });
+
+    bookings.push({
+      startDate: new Date(),
+      endDate: new Date(),
+    });
+    console.log(bookings);
+
+    setBooking(bookings);
   }
 
- 
+  function handleSelect(date) {
+    const nextCounters = booking.map((c, i, a) => {
+      if (i === a.length - 1) {
+        // Increment the clicked counter
+        return Object.values(date)[0];
+      } else {
+        // The rest haven't changed
+        return c;
+      }
+    });
+    setBooking(nextCounters);
+    console.log(date);
+  }
 
   return (
     <div>
@@ -36,29 +79,9 @@ const FetchedVenue = () => {
         maxGuests={fetchedVenue.maxGuests}
         price={fetchedVenue.price}
       />
-    
 
       {fetchedVenue.bookings && (
-        <Calendar
-          classNamePrefix="calendar"
-          selected={selectedDates}
-          onChange={handleChange}
-          onOverbook={(e, err) => alert(err)}
-          disabled={(date, state) => !state.isSameMonth}
-          reserved={(fetchedVenue.bookings.map(() => { 
-
-          }))
-            // [
-            // {
-            //   startDate: new Date(fetchedVenue.bookings[0].dateFrom),
-            //   endDate: new Date(fetchedVenue.bookings[0].dateTo),
-            // },
-          // ]
-        }
-          variant="events"
-          dateFnsOptions={{ weekStartsOn: 1 }}
-          range={true}
-        />
+        <DateRange ranges={booking} onChange={handleSelect} />
       )}
     </div>
   );

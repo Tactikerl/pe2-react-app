@@ -8,7 +8,7 @@ const Nav = () => {
           <Link to="/">Home</Link>
         </li>
         <li className="nav-menu-item">
-          <Link to="">Login/Register</Link>
+          <Link to="./UserRegister">Login/Register</Link>
         </li>
       </ul>
     </div>
