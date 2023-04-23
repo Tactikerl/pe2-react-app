@@ -42,7 +42,11 @@ const UserParams = () => {
     </div>
   );
 };
-
+/**
+ *
+ * Make function below smaller, refactor to use localStorage instead of hardcoded params
+ * make fetch utilize locaStorage data for userName in url == ${userName}
+ */
 async function getUserData() {
   var myHeaders = new Headers();
   myHeaders.append(

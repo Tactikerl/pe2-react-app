@@ -71,7 +71,8 @@ const FetchedVenue = () => {
     setAllBookings(nextCounters);
     console.log(date);
   }
-
+  /* Make function use localStorage for auth token, set up form on venue page for number of 
+guests in booking */
   async function CreateBooking() {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
