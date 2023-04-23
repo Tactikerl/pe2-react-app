@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
+import UserParams from "./UserParams";
 
 const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
@@ -57,6 +58,9 @@ const VenueParams = () => {
         </label>
         <button>Search</button>
       </form>
+      <div>
+        <UserParams />
+      </div>
       <div className="venue-list">
         {fetchVenues
           .filter((venues) =>

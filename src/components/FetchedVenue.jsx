@@ -10,7 +10,7 @@ const FetchedVenue = () => {
   // const handleChange = (e) => setSelectedDates(e);
   const { id } = useParams();
   const [fetchedVenue, setFetchedVenue] = useState({});
-  const [booking, setBooking] = useState([
+  const [allBookings, setAllBookings] = useState([
     {
       startDate: new Date(),
       endDate: null,
@@ -47,24 +47,60 @@ const FetchedVenue = () => {
     bookings.push({
       startDate: new Date(),
       endDate: new Date(),
+      color: "#eb4034",
     });
     console.log(bookings);
 
-    setBooking(bookings);
+    setAllBookings(bookings);
   }
 
   function handleSelect(date) {
-    const nextCounters = booking.map((c, i, a) => {
+    const nextCounters = allBookings.map((booking, i, a) => {
       if (i === a.length - 1) {
         // Increment the clicked counter
-        return Object.values(date)[0];
+        let newDates = Object.values(date).at(0);
+        return {
+          ...booking,
+          ...newDates,
+        };
       } else {
         // The rest haven't changed
-        return c;
+        return booking;
       }
     });
-    setBooking(nextCounters);
+    setAllBookings(nextCounters);
     console.log(date);
+  }
+
+  async function CreateBooking() {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiJLYXJsIiwiZW1haWwiOiJrYXJsdGVzdDAxQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUlXSXBQWThqVklWOE1WdEhnNDR6T3k5Tkw3bEQtX1BuMWY4MFY9czI4OCIsInZlbnVlTWFuYWdlciI6dHJ1ZSwiaWF0IjoxNjgxMjk0NzA2fQ.zh86yzNd2jiblpXH3tMLM2fnkDVOkmT7dJRSSUy2Bh4"
+    );
+
+    var raw = JSON.stringify({
+      dateFrom: allBookings.at(-1).startDate,
+      dateTo: allBookings.at(-1).endDate,
+      guests: 1,
+      venueId: id,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      "https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   }
 
   return (
@@ -81,8 +117,9 @@ const FetchedVenue = () => {
       />
 
       {fetchedVenue.bookings && (
-        <DateRange ranges={booking} onChange={handleSelect} />
+        <DateRange ranges={allBookings} onChange={handleSelect} />
       )}
+      <button onClick={CreateBooking}>Make Booking</button>
     </div>
   );
 };
