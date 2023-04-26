@@ -6,12 +6,26 @@ const NewVenue = () => {
   const [venueImages, setVenueImages] = useState([]);
   const [venuePrice, setVenuePrice] = useState();
   const [maxGuests, setMaxGuests] = useState();
+  const [formState, setFormState] = useState({
+    venueName: "",
+    venueInfo: "",
+    venueImages: [],
+    venuePrice: 0,
+  });
   const [venueMeta, setVenueMeta] = useState({
     wifi: false,
     parking: false,
     breakfast: false,
     pets: false,
   });
+
+  const handleMetaChange = (venueMeta) => {
+    setVenueMeta((prevState) => ({
+      ...prevState,
+      [venueMeta]: !prevState[venueMeta],
+    }));
+  };
+
   return (
     <div>
       <form>
@@ -50,6 +64,7 @@ const NewVenue = () => {
             value={venuePrice}
             required
           />
+          Price per night in NOK
         </label>
         <label htmlFor="maxGuests">
           <input
@@ -59,11 +74,48 @@ const NewVenue = () => {
             value={maxGuests}
             required
           />
+          Number of Guests?
         </label>
         <label htmlFor="venueMetaWifi">
-          <input type="checkbox" name="" />
+          <input
+            type="checkbox"
+            name="venueMetaWifi"
+            id="venueMetaWifi"
+            checked={venueMeta.wifi}
+            onChange={() => handleMetaChange("wifi")}
+          />
+          Wifi
+        </label>
+        <label htmlFor="venueMetaParking">
+          <input
+            type="checkbox"
+            name="venueMetaParking"
+            id="venueMetaParking"
+            checked={venueMeta.parking}
+            onChange={() => handleMetaChange("parking")}
+          />
+        </label>
+        <label htmlFor="venueMetaBreakfast">
+          <input
+            type="checkbox"
+            name="venueMetaBreakfast"
+            id="venueMetaBreakfast"
+            checked={venueMeta.breakfast}
+            onChange={() => handleMetaChange("breakfast")}
+          />
+        </label>
+        <label htmlFor="venueMetaPets">
+          <input
+            type="checkbox"
+            name="venueMetaPets"
+            id="venueMetaPets"
+            checked={venueName.pets}
+            onChange={() => handleMetaChange("pets")}
+          />
         </label>
       </form>
     </div>
   );
 };
+
+export default NewVenue;
