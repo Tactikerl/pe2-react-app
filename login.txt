@@ -1,0 +1,14 @@
+2023-04-12_ProjectExam2_PE2_Karl-Kvammen_Repo
+
+karltest01@stud.noroff.no
+karltest123456
+
+{
+    "id": 17,
+    "name": "Karl",
+    "email": "karltest01@stud.noroff.no",
+    "avatar": "https://lh3.googleusercontent.com/a/AGNmyxaIWIpPY8jVIV8MVtHg44zOy9NL7lD-_Pn1f80V=s288",
+    "venueManager": true
+}
+
+"accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiJLYXJsIiwiZW1haWwiOiJrYXJsdGVzdDAxQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUlXSXBQWThqVklWOE1WdEhnNDR6T3k5Tkw3bEQtX1BuMWY4MFY9czI4OCIsInZlbnVlTWFuYWdlciI6dHJ1ZSwiaWF0IjoxNjgxMjk0NzA2fQ.zh86yzNd2jiblpXH3tMLM2fnkDVOkmT7dJRSSUy2Bh4"
