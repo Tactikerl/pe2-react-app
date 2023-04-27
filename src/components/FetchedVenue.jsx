@@ -57,14 +57,12 @@ const FetchedVenue = () => {
   function handleSelect(date) {
     const nextCounters = allBookings.map((booking, i, a) => {
       if (i === a.length - 1) {
-        // Increment the clicked counter
         let newDates = Object.values(date).at(0);
         return {
           ...booking,
           ...newDates,
         };
       } else {
-        // The rest haven't changed
         return booking;
       }
     });
