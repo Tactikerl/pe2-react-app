@@ -113,6 +113,7 @@ const NewVenue = () => {
             onChange={() => handleMetaChange("pets")}
           />
         </label>
+        <button type="submit"></button>
       </form>
     </div>
   );
