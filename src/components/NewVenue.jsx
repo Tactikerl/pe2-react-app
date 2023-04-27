@@ -3,15 +3,10 @@ import { useState } from "react";
 const NewVenue = () => {
   const [venueName, setVenueName] = useState("");
   const [venueInfo, setVenueInfo] = useState("");
-  const [venueImages, setVenueImages] = useState([]);
-  const [venuePrice, setVenuePrice] = useState();
-  const [maxGuests, setMaxGuests] = useState();
-  const [formState, setFormState] = useState({
-    venueName: "",
-    venueInfo: "",
-    venueImages: [],
-    venuePrice: 0,
-  });
+  const [venueImages, setVenueImages] = useState([""]);
+  const [venuePrice, setVenuePrice] = useState(0);
+  const [maxGuests, setMaxGuests] = useState(0);
+
   const [venueMeta, setVenueMeta] = useState({
     wifi: false,
     parking: false,
@@ -24,6 +19,19 @@ const NewVenue = () => {
       ...prevState,
       [venueMeta]: !prevState[venueMeta],
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const venueData = {
+      name: venueName,
+      description: venueInfo,
+      media: venueImages,
+      price: venuePrice,
+      maxGuests: maxGuests,
+      meta: venueMeta,
+    };
   };
 
   return (
