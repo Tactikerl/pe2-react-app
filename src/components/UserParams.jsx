@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import DisplayUser from "./DisplayUser";
 
+const user = localStorage.getItem("username");
+const token = localStorage.getItem("accessToken");
+
 const UserParams = () => {
-  //   const userId = 17;
-  //   const userLogin = "Karl";
-  // const userUrl = "https://nf-api.onrender.com/api/v1/holidaze/profiles/Karl?_bookings=true&_venues=true"
-  //   const userToken =
-  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiJLYXJsIiwiZW1haWwiOiJrYXJsdGVzdDAxQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUlXSXBQWThqVklWOE1WdEhnNDR6T3k5Tkw3bEQtX1BuMWY4MFY9czI4OCIsInZlbnVlTWFuYWdlciI6dHJ1ZSwiaWF0IjoxNjgxMjk0NzA2fQ.zh86yzNd2jiblpXH3tMLM2fnkDVOkmT7dJRSSUy2Bh4";
   const [userData, setUserData] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
   useEffect(() => {
     async function userDataFetch() {
       try {
+        if (!token) return null;
         setHasError(false);
         setIsLoading(true);
         const res = await getUserData();
@@ -25,7 +25,7 @@ const UserParams = () => {
         } else {
           setIsLoading(false);
           setHasError(true);
-          console.log("No user logged inn");
+          console.log("No user logged in");
         }
       } catch (error) {
         console.error(error);
@@ -33,6 +33,10 @@ const UserParams = () => {
     }
     userDataFetch();
   }, []);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <div>
@@ -42,17 +46,10 @@ const UserParams = () => {
     </div>
   );
 };
-/**
- *
- * Make function below smaller, refactor to use localStorage instead of hardcoded params
- * make fetch utilize locaStorage data for userName in url == ${userName}
- */
+
 async function getUserData() {
   var myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiJLYXJsIiwiZW1haWwiOiJrYXJsdGVzdDAxQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUlXSXBQWThqVklWOE1WdEhnNDR6T3k5Tkw3bEQtX1BuMWY4MFY9czI4OCIsInZlbnVlTWFuYWdlciI6dHJ1ZSwiaWF0IjoxNjgxMjk0NzA2fQ.zh86yzNd2jiblpXH3tMLM2fnkDVOkmT7dJRSSUy2Bh4"
-  );
+  myHeaders.append("Authorization", "Bearer " + token);
 
   var requestOptions = {
     method: "GET",
@@ -61,7 +58,7 @@ async function getUserData() {
   };
 
   return await fetch(
-    "https://nf-api.onrender.com/api/v1/holidaze/profiles/Karl?_bookings=true&_venues=true",
+    `https://nf-api.onrender.com/api/v1/holidaze/profiles/${user}?_bookings=true&_venues=true`,
     requestOptions
   );
 }

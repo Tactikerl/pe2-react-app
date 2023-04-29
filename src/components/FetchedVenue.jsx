@@ -6,8 +6,6 @@ import ViewVenue from "./ViewVenue";
 import { DateRange } from "react-date-range";
 
 const FetchedVenue = () => {
-  // const [selectedDates, setSelectedDates] = useState([]);
-  // const handleChange = (e) => setSelectedDates(e);
   const { id } = useParams();
   const [fetchedVenue, setFetchedVenue] = useState({});
   const [allBookings, setAllBookings] = useState([
@@ -72,12 +70,12 @@ const FetchedVenue = () => {
   /* Make function use localStorage for auth token, set up form on venue page for number of 
 guests in booking */
   async function CreateBooking() {
+    const token = localStorage.getItem("accessToken");
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTcsIm5hbWUiOiJLYXJsIiwiZW1haWwiOiJrYXJsdGVzdDAxQHN0dWQubm9yb2ZmLm5vIiwiYXZhdGFyIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4YUlXSXBQWThqVklWOE1WdEhnNDR6T3k5Tkw3bEQtX1BuMWY4MFY9czI4OCIsInZlbnVlTWFuYWdlciI6dHJ1ZSwiaWF0IjoxNjgxMjk0NzA2fQ.zh86yzNd2jiblpXH3tMLM2fnkDVOkmT7dJRSSUy2Bh4"
-    );
+
+    myHeaders.append("Authorization", "Bearer " + token);
 
     var raw = JSON.stringify({
       dateFrom: allBookings.at(-1).startDate,
@@ -118,7 +116,11 @@ guests in booking */
       {fetchedVenue.bookings && (
         <DateRange ranges={allBookings} onChange={handleSelect} />
       )}
-      <button onClick={CreateBooking}>Make Booking</button>
+      {localStorage.getItem("accessToken") &&
+      localStorage.getItem("username") &&
+      localStorage.getItem("email") ? (
+        <button onClick={CreateBooking}>Make Booking</button>
+      ) : null}
     </div>
   );
 };
