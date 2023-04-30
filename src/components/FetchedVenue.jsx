@@ -71,7 +71,8 @@ const FetchedVenue = () => {
 guests in booking */
   async function CreateBooking() {
     const token = localStorage.getItem("accessToken");
-
+    const [guestNmbr, setGuestNmbr] = useState(0);
+    /** make a check to see that guestNmbr do not exceed maxGuests for the venue id, also make guestNmbr be set at same time with the date selected */
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
