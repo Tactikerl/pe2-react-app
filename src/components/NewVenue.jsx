@@ -40,7 +40,7 @@ const NewVenue = () => {
       maxGuests: parseInt(maxGuests),
       meta: venueMeta,
     };
-    const token = localStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -54,6 +54,7 @@ const NewVenue = () => {
           body: JSON.stringify(venueData),
         }
       );
+      console.log(venueData);
       if (!res.ok) {
         throw Error(`HTTP error! status: ${res.status}`);
       }

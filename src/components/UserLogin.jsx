@@ -31,9 +31,9 @@ const UserLogin = () => {
 
       const { name, email, accessToken } = json;
 
-      localStorage.setItem("username", name);
-      localStorage.setItem("email", email);
-      localStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("username", name);
+      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("accessToken", accessToken);
 
       console.log("User successfully logged inn!");
     } catch (error) {

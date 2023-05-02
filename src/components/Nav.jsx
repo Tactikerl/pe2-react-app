@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import UserLogout from "./UserLogout";
 
 const Nav = () => {
-  const isLoggedIn = !!localStorage.getItem("accessToken");
+  const isLoggedIn = !!sessionStorage.getItem("accessToken");
   return (
     <div className="nav-wrapper">
       <ul className="nav-menu">

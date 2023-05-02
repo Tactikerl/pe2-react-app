@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import DisplayUser from "./DisplayUser";
 
-const user = localStorage.getItem("username");
-const token = localStorage.getItem("accessToken");
+const user = sessionStorage.getItem("username");
+const token = sessionStorage.getItem("accessToken");
 
 const UserParams = () => {
   const [userData, setUserData] = useState([]);

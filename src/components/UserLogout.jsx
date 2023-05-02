@@ -1,6 +1,6 @@
 const UserLogout = () => {
   const handleStorageClear = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     window.location.href = "/";
   };
 

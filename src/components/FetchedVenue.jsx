@@ -22,6 +22,7 @@ const FetchedVenue = () => {
       key: "selection",
     },
   ]);
+  const [guests, setGuests] = useState(1);
 
   useEffect(() => {
     requestFetchedVenue(id);
@@ -67,11 +68,15 @@ const FetchedVenue = () => {
     setAllBookings(nextCounters);
     console.log(date);
   }
-  /* Make function use localStorage for auth token, set up form on venue page for number of 
-guests in booking */
+
+  function handleGuestsChange(e) {
+    const newGuests = parseInt(e.target.value);
+    setGuests(newGuests);
+  }
+
   async function CreateBooking() {
-    const token = localStorage.getItem("accessToken");
-    const [guestNmbr, setGuestNmbr] = useState(0);
+    const token = sessionStorage.getItem("accessToken");
+
     /** make a check to see that guestNmbr do not exceed maxGuests for the venue id, also make guestNmbr be set at same time with the date selected */
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -81,7 +86,7 @@ guests in booking */
     var raw = JSON.stringify({
       dateFrom: allBookings.at(-1).startDate,
       dateTo: allBookings.at(-1).endDate,
-      guests: 1,
+      guests: guests,
       venueId: id,
     });
 
@@ -117,9 +122,9 @@ guests in booking */
       {fetchedVenue.bookings && (
         <DateRange ranges={allBookings} onChange={handleSelect} />
       )}
-      {localStorage.getItem("accessToken") &&
-      localStorage.getItem("username") &&
-      localStorage.getItem("email") ? (
+      {sessionStorage.getItem("accessToken") &&
+      sessionStorage.getItem("username") &&
+      sessionStorage.getItem("email") ? (
         <button onClick={CreateBooking}>Make Booking</button>
       ) : null}
     </div>
