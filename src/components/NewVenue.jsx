@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewVenue = () => {
+  const navigate = useNavigate();
   const [venueName, setVenueName] = useState("");
   const [venueInfo, setVenueInfo] = useState("");
   const [venueImages, setVenueImages] = useState([]);
@@ -29,6 +31,14 @@ const NewVenue = () => {
     }));
   };
 
+  function handleLocationChange(e) {
+    const { name, value } = e.target;
+    setVenueLocation((prevLocation) => ({
+      ...prevLocation,
+      [name]: name === "lat" || name === "lng" ? parseFloat(value) : value,
+    }));
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,6 +49,7 @@ const NewVenue = () => {
       price: parseInt(venuePrice),
       maxGuests: parseInt(maxGuests),
       meta: venueMeta,
+      location: venueLocation,
     };
     const token = sessionStorage.getItem("accessToken");
 
@@ -55,10 +66,15 @@ const NewVenue = () => {
         }
       );
       console.log(venueData);
+
       if (!res.ok) {
         throw Error(`HTTP error! status: ${res.status}`);
       }
+
       console.log("Venue creation successfull!");
+
+      const venue = await res.json();
+      navigate(`/venues/${venue.id}`);
     } catch (error) {
       console.error("Error creating Venue;", error);
     }
@@ -159,6 +175,68 @@ const NewVenue = () => {
           />
           Pets
         </label>
+
+        <label htmlFor="venueAddress">
+          Address
+          <input
+            type="text"
+            name="address"
+            id="venueLocationAddress"
+            value={venueLocation.address}
+            onChange={handleLocationChange}
+          />
+        </label>
+        <label htmlFor="venueCity">
+          City
+          <input
+            type="text"
+            name="city"
+            id="venueLocationCity"
+            value={venueLocation.city}
+            onChange={handleLocationChange}
+          />
+        </label>
+        <label htmlFor="venueZip">
+          ZIP
+          <input
+            type="text"
+            name="zip"
+            id="venueLocationZip"
+            value={venueLocation.zip}
+            onChange={handleLocationChange}
+          />
+        </label>
+        <label htmlFor="venueCountry">
+          Country
+          <input
+            type="text"
+            name="country"
+            id="venueLocationCountry"
+            value={venueLocation.country}
+            onChange={handleLocationChange}
+          />
+        </label>
+        <label htmlFor="venueLat">
+          Latitude
+          <input
+            type="number"
+            name="lat"
+            id="venueLocationLat"
+            value={venueLocation.lat}
+            onChange={handleLocationChange}
+          />
+        </label>
+        <label htmlFor="venueLng">
+          Longitude
+          <input
+            type="number"
+            name="lng"
+            id="venueLocationLng"
+            value={venueLocation.lng}
+            onChange={handleLocationChange}
+          />
+        </label>
+
         <button type="submit">Create Venue</button>
       </form>
     </div>
