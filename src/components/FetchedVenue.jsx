@@ -4,6 +4,9 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import ViewVenue from "./ViewVenue";
 import { DateRange } from "react-date-range";
+import { API_ALL_BOOKINGS, API_FETCH_VENUE, API_VENUE_PARAMS } from "./url";
+import DeleteVenue from "./DeleteVenue";
+import EditVenueButton from "./EditVenueButton";
 
 const FetchedVenue = () => {
   const { id } = useParams();
@@ -29,9 +32,7 @@ const FetchedVenue = () => {
   }, [id]);
 
   async function requestFetchedVenue(id) {
-    const res = await fetch(
-      `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true&_bookings=true`
-    );
+    const res = await fetch(`${API_FETCH_VENUE}${id}${API_VENUE_PARAMS}`);
     const json = await res.json();
     setFetchedVenue(json);
 
@@ -97,10 +98,7 @@ const FetchedVenue = () => {
       redirect: "follow",
     };
 
-    fetch(
-      "https://nf-api.onrender.com/api/v1/holidaze/bookings?_customer=true&_venue=true",
-      requestOptions
-    )
+    fetch(`${API_ALL_BOOKINGS}`, requestOptions)
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
@@ -118,6 +116,14 @@ const FetchedVenue = () => {
         maxGuests={fetchedVenue.maxGuests}
         price={fetchedVenue.price}
       />
+      {fetchedVenue.owner &&
+        fetchedVenue.owner.name &&
+        sessionStorage.getItem("username") === fetchedVenue.owner.name && (
+          <>
+            <DeleteVenue id={fetchedVenue.id} />
+            <EditVenueButton venueId={fetchedVenue.id} />
+          </>
+        )}
 
       {fetchedVenue.bookings && (
         <DateRange ranges={allBookings} onChange={handleSelect} />

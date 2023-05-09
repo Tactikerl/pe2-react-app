@@ -6,6 +6,7 @@ import UserRegister from "./components/UserRegister";
 import UserLogin from "./components/UserLogin";
 import Nav from "./components/Nav";
 import NewVenue from "./components/NewVenue";
+import EditVenue from "./components/EditVenue";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/UserRegister" element={<UserRegister />} />
         <Route path="/NewVenue" element={<NewVenue />} />
         <Route path="/UserLogin" element={<UserLogin />} />
+        <Route path="/venues/:id/edit" element={<EditVenue />} />
       </Routes>
     </BrowserRouter>
   );

@@ -8,7 +8,9 @@ const NewVenue = () => {
   const [venueImages, setVenueImages] = useState([]);
   const [venuePrice, setVenuePrice] = useState(0);
   const [maxGuests, setMaxGuests] = useState(0);
-
+  const handleVenueImages = (image) => {
+    setVenueImages((prevImages) => [...prevImages, image]);
+  };
   const [venueMeta, setVenueMeta] = useState({
     wifi: false,
     parking: false,

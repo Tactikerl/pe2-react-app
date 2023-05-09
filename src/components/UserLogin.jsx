@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_LOGIN } from "./url";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -12,16 +13,13 @@ const UserLogin = () => {
       password: password,
     };
     try {
-      const res = await fetch(
-        "https://nf-api.onrender.com/api/v1/holidaze/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(loginData),
-        }
-      );
+      const res = await fetch(`${API_LOGIN}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginData),
+      });
 
       if (res.status !== 200) {
         throw new Error(`HTTP Error!  status: ${res.status}`);
@@ -29,11 +27,12 @@ const UserLogin = () => {
       const json = await res.json();
       console.log(json);
 
-      const { name, email, accessToken } = json;
+      const { name, email, accessToken, venueManager } = json;
 
       sessionStorage.setItem("username", name);
       sessionStorage.setItem("email", email);
       sessionStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("isManager", venueManager);
 
       console.log("User successfully logged inn!");
     } catch (error) {
