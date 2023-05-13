@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DisplayVenues from "../frontpage/DisplayVenues";
-import UserParams from "./UserParams";
+import DisplayVenues from "./DisplayVenues";
+import UserParams from "../common/UserParams";
 
 // Refactor and import url from url folder!
 const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;

@@ -9,8 +9,8 @@ import {
   API_FETCH_VENUE,
   API_VENUE_PARAMS,
 } from "../utils/url";
-import DeleteVenue from "./DeleteVenue";
-import EditVenueButton from "./EditVenueButton";
+import DeleteVenue from "../common/DeleteVenue";
+import EditVenueButton from "../common/EditVenueButton";
 
 const FetchedVenue = () => {
   const { id } = useParams();
