@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import UserLogout from "../profile/UserLogout";
+import UserLogout from "./UserLogout";
 
+//import userprofile and set Link to profile!
 const Nav = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
   return (

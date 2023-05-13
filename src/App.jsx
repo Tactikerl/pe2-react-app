@@ -2,11 +2,11 @@ import VenueParams from "./components/common/VenueParams";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import FetchedVenue from "./components/venue/FetchedVenue";
-import UserRegister from "./components/profile/UserRegister";
-import UserLogin from "./components/profile/UserLogin";
+import UserRegister from "./components/common/UserRegister";
+import UserLogin from "./components/common/UserLogin";
 import Nav from "./components/common/Nav";
 import NewVenue from "./components/common/NewVenue";
-import EditVenue from "./components/venue/EditVenue";
+import EditVenue from "./components/venueEdit/EditVenue";
 
 function App() {
   return (
