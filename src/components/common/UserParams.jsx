@@ -7,7 +7,7 @@ const token = sessionStorage.getItem("accessToken");
 const isManager = sessionStorage.getItem("isManager");
 
 const UserParams = () => {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [status, setStatus] = useState("loading");
   const [newAvatar, setNewAvatar] = useState("");
 

@@ -86,20 +86,21 @@ const NewVenue = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="venueName">
+        <label>
+          <span aria-hidden="true">VenueName:</span>
           <input
+            aria-label="VenueName"
             type="text"
-            id="venueName"
             value={venueName}
             onChange={(e) => setVenueName(e.target.value)}
             placeholder="Venue Name.."
             required
           />
         </label>
-        <label htmlFor="venueInfo">
+        <label>
+          <span aria-hidden="true"></span>
           <input
             type="text"
-            id="venueInfo"
             value={venueInfo}
             onChange={(e) => setVenueInfo(e.target.value)}
             placeholder="Venue Description"
@@ -110,14 +111,11 @@ const NewVenue = () => {
           {venueImages.map((imageElement, index) => (
             <div key={index}>{imageElement}</div>
           ))}
-          <label htmlFor="venueImages">
+          <label>
             Add image url
+            <span aria-hidden="true"></span>
             <input
               type="text"
-              id="venueImages"
-              name="venueImages"
-              // value={venueImages}
-              // onChange={(e) => setVenueImages(e.target.value)}
               ref={imageElement}
               placeholder="Paste Url for venue images here"
             />
@@ -130,126 +128,112 @@ const NewVenue = () => {
             </button>
           </label>
         </div>
-
-        <label htmlFor="venuePrice">
+        <label>
           Price per night in NOK
+          <span aria-hidden="true"></span>
           <input
             type="number"
-            name="venuePrice"
-            id="venuePrice"
             value={venuePrice}
             onChange={(e) => setVenuePrice(e.target.value)}
             required
           />
         </label>
-        <label htmlFor="maxGuests">
+        <label>
           Number of Guests?
+          <span aria-hidden="true"></span>
           <input
             type="number"
-            name="maxGuests"
-            id="maxGuests"
             value={maxGuests}
             onChange={(e) => setMaxGuests(e.target.value)}
             required
           />
         </label>
-        <label htmlFor="venueMetaWifi">
+        <label>
+          <span aria-hidden="true"></span>
           <input
             type="checkbox"
-            name="venueMetaWifi"
-            id="venueMetaWifi"
             checked={venueMeta.wifi}
             onChange={() => handleMetaChange("wifi")}
           />
           Wifi
         </label>
-        <label htmlFor="venueMetaParking">
+        <label>
+          <span aria-hidden="true"></span>
           <input
             type="checkbox"
-            name="venueMetaParking"
-            id="venueMetaParking"
             checked={venueMeta.parking}
             onChange={() => handleMetaChange("parking")}
           />
           Parking
         </label>
-        <label htmlFor="venueMetaBreakfast">
+        <label>
+          <span aria-hidden="true"></span>
           <input
             type="checkbox"
-            name="venueMetaBreakfast"
-            id="venueMetaBreakfast"
             checked={venueMeta.breakfast}
             onChange={() => handleMetaChange("breakfast")}
           />
           Breakfast
         </label>
-        <label htmlFor="venueMetaPets">
+        <label>
+          <span aria-hidden="true"></span>
           <input
             type="checkbox"
-            name="venueMetaPets"
-            id="venueMetaPets"
             checked={venueName.pets}
             onChange={() => handleMetaChange("pets")}
           />
           Pets
         </label>
-
-        <label htmlFor="venueAddress">
+        <label>
           Address
+          <span aria-hidden="true"></span>
           <input
             type="text"
-            name="address"
-            id="venueLocationAddress"
             value={venueLocation.address}
             onChange={handleLocationChange}
           />
         </label>
-        <label htmlFor="venueCity">
+        <label>
           City
+          <span aria-hidden="true"></span>
           <input
             type="text"
-            name="city"
-            id="venueLocationCity"
             value={venueLocation.city}
             onChange={handleLocationChange}
           />
         </label>
-        <label htmlFor="venueZip">
+        <label>
           ZIP
+          <span aria-hidden="true"></span>
           <input
             type="text"
-            name="zip"
-            id="venueLocationZip"
             value={venueLocation.zip}
             onChange={handleLocationChange}
           />
         </label>
-        <label htmlFor="venueCountry">
+        <label>
           Country
+          <span aria-hidden="true"></span>
           <input
             type="text"
-            name="country"
-            id="venueLocationCountry"
             value={venueLocation.country}
             onChange={handleLocationChange}
           />
         </label>
-        <label htmlFor="venueLat">
+        <label>
           Latitude
+          <span aria-hidden="true"></span>
           <input
             type="number"
-            name="lat"
-            id="venueLocationLat"
             value={venueLocation.lat}
             onChange={handleLocationChange}
           />
         </label>
-        <label htmlFor="venueLng">
+        <label>
           Longitude
+          <span aria-hidden="true"></span>
           <input
             type="number"
-            name="lng"
-            id="venueLocationLng"
             value={venueLocation.lng}
             onChange={handleLocationChange}
           />

@@ -45,20 +45,20 @@ const UserLogin = () => {
   return (
     <div>
       <form onSubmit={handleLogin}>
-        <label htmlFor="loginEmail">
-          Email
+        <label>
+          Email:
+          <span aria-hidden="true">Email:</span>
           <input
             type="text"
-            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </label>
-        <label htmlFor="loginPassword">
-          Password
+        <label>
+          Password:
+          <span aria-hidden="true">Password:</span>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
