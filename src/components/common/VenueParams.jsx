@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DisplayVenues from "./DisplayVenues";
+import DisplayVenues from "../venue/DisplayVenues";
 import UserParams from "./UserParams";
 
 const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;

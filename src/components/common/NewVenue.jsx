@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NewVenue = () => {
@@ -11,6 +11,7 @@ const NewVenue = () => {
   const handleVenueImages = (image) => {
     setVenueImages((prevImages) => [...prevImages, image]);
   };
+  const imageElement = useRef("");
   const [venueMeta, setVenueMeta] = useState({
     wifi: false,
     parking: false,
@@ -47,7 +48,7 @@ const NewVenue = () => {
     const venueData = {
       name: venueName,
       description: venueInfo,
-      media: [venueImages],
+      media: venueImages,
       price: parseInt(venuePrice),
       maxGuests: parseInt(maxGuests),
       meta: venueMeta,
@@ -105,16 +106,31 @@ const NewVenue = () => {
             required
           />
         </label>
-        <label htmlFor="venueImages">
-          <input
-            type="text"
-            id="venueImages"
-            name="venueImages"
-            value={venueImages}
-            onChange={(e) => setVenueImages(e.target.value)}
-            placeholder="Paste Url for venue images here"
-          />
-        </label>
+        <div>
+          {venueImages.map((imageElement, index) => (
+            <div key={index}>{imageElement}</div>
+          ))}
+          <label htmlFor="venueImages">
+            Add image url
+            <input
+              type="text"
+              id="venueImages"
+              name="venueImages"
+              // value={venueImages}
+              // onChange={(e) => setVenueImages(e.target.value)}
+              ref={imageElement}
+              placeholder="Paste Url for venue images here"
+            />
+            <button
+              onClick={() => {
+                handleVenueImages(imageElement.current.value);
+              }}
+            >
+              Add
+            </button>
+          </label>
+        </div>
+
         <label htmlFor="venuePrice">
           Price per night in NOK
           <input

@@ -4,7 +4,11 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import ViewVenue from "./ViewVenue";
 import { DateRange } from "react-date-range";
-import { API_ALL_BOOKINGS, API_FETCH_VENUE, API_VENUE_PARAMS } from "./url";
+import {
+  API_ALL_BOOKINGS,
+  API_FETCH_VENUE,
+  API_VENUE_PARAMS,
+} from "../utils/url";
 import DeleteVenue from "./DeleteVenue";
 import EditVenueButton from "./EditVenueButton";
 

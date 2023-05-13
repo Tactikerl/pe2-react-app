@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { API_LOGIN } from "./url";
+import { API_LOGIN } from "../utils/url";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");

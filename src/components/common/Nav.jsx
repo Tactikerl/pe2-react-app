@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import UserLogout from "./UserLogout";
+import UserLogout from "../profile/UserLogout";
 
 const Nav = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");

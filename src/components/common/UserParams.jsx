@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DisplayUser from "./DisplayUser";
-import { API_MANAGER_ENDPOINT, API_PROFILES, API_HEADERS } from "./url";
+import { API_MANAGER_ENDPOINT, API_PROFILES, API_HEADERS } from "../utils/url";
 
 const user = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("accessToken");

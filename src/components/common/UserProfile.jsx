@@ -5,7 +5,7 @@ import {
   API_CUSTOMER_ENDPOINT,
   API_PROFILES,
   API_HEADERS,
-} from "./url";
+} from "../utils/url";
 
 const user = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("accessToken");
