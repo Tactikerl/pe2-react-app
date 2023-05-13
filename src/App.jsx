@@ -4,7 +4,7 @@ import "./App.css";
 import FetchedVenue from "./components/venue/FetchedVenue";
 import UserRegister from "./components/userregister/UserRegister";
 import UserLogin from "./components/userlogin/UserLogin";
-import Nav from "./components/common/Nav";
+import Nav from "./components/header/Nav";
 import NewVenue from "./components/newvenue/NewVenue";
 import EditVenue from "./components/venueEdit/EditVenue";
 
