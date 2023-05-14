@@ -47,7 +47,6 @@ const UserLogin = () => {
       <form onSubmit={handleLogin}>
         <label>
           Email:
-          <span aria-hidden="true">Email:</span>
           <input
             type="text"
             value={email}
@@ -56,7 +55,6 @@ const UserLogin = () => {
         </label>
         <label>
           Password:
-          <span aria-hidden="true">Password:</span>
           <input
             type="password"
             value={password}

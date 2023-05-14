@@ -87,9 +87,8 @@ const NewVenue = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          <span aria-hidden="true">VenueName:</span>
+          Venue Name:
           <input
-            aria-label="VenueName"
             type="text"
             value={venueName}
             onChange={(e) => setVenueName(e.target.value)}
@@ -98,12 +97,12 @@ const NewVenue = () => {
           />
         </label>
         <label>
-          <span aria-hidden="true"></span>
+          Description of the Venue
           <input
             type="text"
             value={venueInfo}
             onChange={(e) => setVenueInfo(e.target.value)}
-            placeholder="Venue Description"
+            placeholder="Text here..."
             required
           />
         </label>
@@ -113,7 +112,6 @@ const NewVenue = () => {
           ))}
           <label>
             Add image url
-            <span aria-hidden="true"></span>
             <input
               type="text"
               ref={imageElement}
@@ -130,7 +128,6 @@ const NewVenue = () => {
         </div>
         <label>
           Price per night in NOK
-          <span aria-hidden="true"></span>
           <input
             type="number"
             value={venuePrice}
@@ -140,7 +137,6 @@ const NewVenue = () => {
         </label>
         <label>
           Number of Guests?
-          <span aria-hidden="true"></span>
           <input
             type="number"
             value={maxGuests}
@@ -149,44 +145,39 @@ const NewVenue = () => {
           />
         </label>
         <label>
-          <span aria-hidden="true"></span>
+          Wifi?
           <input
             type="checkbox"
             checked={venueMeta.wifi}
             onChange={() => handleMetaChange("wifi")}
           />
-          Wifi
         </label>
         <label>
-          <span aria-hidden="true"></span>
+          Parking?
           <input
             type="checkbox"
             checked={venueMeta.parking}
             onChange={() => handleMetaChange("parking")}
           />
-          Parking
         </label>
         <label>
-          <span aria-hidden="true"></span>
+          Breakfast?
           <input
             type="checkbox"
             checked={venueMeta.breakfast}
             onChange={() => handleMetaChange("breakfast")}
           />
-          Breakfast
         </label>
         <label>
-          <span aria-hidden="true"></span>
+          Pets?
           <input
             type="checkbox"
             checked={venueName.pets}
             onChange={() => handleMetaChange("pets")}
           />
-          Pets
         </label>
         <label>
           Address
-          <span aria-hidden="true"></span>
           <input
             type="text"
             value={venueLocation.address}
@@ -195,7 +186,6 @@ const NewVenue = () => {
         </label>
         <label>
           City
-          <span aria-hidden="true"></span>
           <input
             type="text"
             value={venueLocation.city}
@@ -204,7 +194,6 @@ const NewVenue = () => {
         </label>
         <label>
           ZIP
-          <span aria-hidden="true"></span>
           <input
             type="text"
             value={venueLocation.zip}
@@ -213,7 +202,6 @@ const NewVenue = () => {
         </label>
         <label>
           Country
-          <span aria-hidden="true"></span>
           <input
             type="text"
             value={venueLocation.country}
@@ -222,7 +210,6 @@ const NewVenue = () => {
         </label>
         <label>
           Latitude
-          <span aria-hidden="true"></span>
           <input
             type="number"
             value={venueLocation.lat}
@@ -231,7 +218,6 @@ const NewVenue = () => {
         </label>
         <label>
           Longitude
-          <span aria-hidden="true"></span>
           <input
             type="number"
             value={venueLocation.lng}
