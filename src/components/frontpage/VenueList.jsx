@@ -5,7 +5,7 @@ import UserParams from "../common/UserParams";
 // Refactor and import url from url folder!
 const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
-const VenueParams = () => {
+const VenueList = () => {
   const [fetchVenues, setFetchVenues] = useState([]);
   const [venueSearch, setVenueSearch] = useState("");
 
@@ -83,4 +83,4 @@ const VenueParams = () => {
   );
 };
 
-export default VenueParams;
+export default VenueList;

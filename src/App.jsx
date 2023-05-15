@@ -1,7 +1,7 @@
-import VenueParams from "./components/frontpage/VenueParams";
+import VenueList from "./components/frontpage/VenueList";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import FetchedVenue from "./components/venue/FetchedVenue";
+import Venue from "./components/venue/Venue";
 import UserRegister from "./components/userregister/UserRegister";
 import UserLogin from "./components/userlogin/UserLogin";
 import Nav from "./components/header/Nav";
@@ -13,8 +13,8 @@ function App() {
     <BrowserRouter>
       <Nav />
       <Routes>
-        <Route path="/venues/:id" element={<FetchedVenue />} />
-        <Route path="" element={<VenueParams />} />
+        <Route path="/venues/:id" element={<Venue />} />
+        <Route path="" element={<VenueList />} />
         <Route path="/UserRegister" element={<UserRegister />} />
         <Route path="/NewVenue" element={<NewVenue />} />
         <Route path="/UserLogin" element={<UserLogin />} />

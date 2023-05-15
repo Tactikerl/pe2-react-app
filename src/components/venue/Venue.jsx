@@ -12,9 +12,9 @@ import {
 import DeleteVenue from "../common/DeleteVenue";
 import EditVenueButton from "../common/EditVenueButton";
 
-const FetchedVenue = () => {
+const Venue = () => {
   const { id } = useParams();
-  const [fetchedVenue, setFetchedVenue] = useState({});
+  const [venue, setVenue] = useState({});
   const [allBookings, setAllBookings] = useState([
     {
       startDate: new Date(),
@@ -32,13 +32,13 @@ const FetchedVenue = () => {
   const [guests, setGuests] = useState(1);
 
   useEffect(() => {
-    requestFetchedVenue(id);
+    requestVenue(id);
   }, [id]);
 
-  async function requestFetchedVenue(id) {
+  async function requestVenue(id) {
     const res = await fetch(`${API_FETCH_VENUE}${id}${API_VENUE_PARAMS}`);
     const json = await res.json();
-    setFetchedVenue(json);
+    setVenue(json);
 
     let bookings = json.bookings.map((booking) => {
       return {
@@ -111,25 +111,25 @@ const FetchedVenue = () => {
   return (
     <div>
       <ViewVenue
-        name={fetchedVenue.name}
-        images={fetchedVenue.media}
-        owner={fetchedVenue.owner}
-        created={fetchedVenue.created}
-        updated={fetchedVenue.updated}
-        meta={fetchedVenue.meta}
-        maxGuests={fetchedVenue.maxGuests}
-        price={fetchedVenue.price}
+        name={venue.name}
+        images={venue.media}
+        owner={venue.owner}
+        created={venue.created}
+        updated={venue.updated}
+        meta={venue.meta}
+        maxGuests={venue.maxGuests}
+        price={venue.price}
       />
-      {fetchedVenue.owner &&
-        fetchedVenue.owner.name &&
-        sessionStorage.getItem("username") === fetchedVenue.owner.name && (
+      {venue.owner &&
+        venue.owner.name &&
+        sessionStorage.getItem("username") === venue.owner.name && (
           <>
-            <DeleteVenue id={fetchedVenue.id} />
-            <EditVenueButton venueId={fetchedVenue.id} />
+            <DeleteVenue id={venue.id} />
+            <EditVenueButton venueId={venue.id} />
           </>
         )}
 
-      {fetchedVenue.bookings && (
+      {venue.bookings && (
         <DateRange ranges={allBookings} onChange={handleSelect} />
       )}
       {sessionStorage.getItem("accessToken") &&
@@ -141,4 +141,4 @@ const FetchedVenue = () => {
   );
 };
 
-export default FetchedVenue;
+export default Venue;
