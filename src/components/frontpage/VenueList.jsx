@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import DisplayVenues from "./DisplayVenue";
+import DisplayVenues from "./DisplayVenues";
+import UserParams from "../common/UserParams";
 
-const url = `https://nf-api.onrender.com/api/v1/holidaze/venues`;
+// Refactor and import url from url folder!
+const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
-const VenueParams = () => {
+const VenueList = () => {
   const [fetchVenues, setFetchVenues] = useState([]);
   const [venueSearch, setVenueSearch] = useState("");
 
@@ -57,6 +59,9 @@ const VenueParams = () => {
         </label>
         <button>Search</button>
       </form>
+      <div>
+        <UserParams />
+      </div>
       <div className="venue-list">
         {fetchVenues
           .filter((venues) =>
@@ -64,9 +69,10 @@ const VenueParams = () => {
           )
           .map((venue) => (
             <DisplayVenues
+              id={venue.id}
               key={venue.id}
               name={venue.name}
-              owner={venue.owner}
+              owner={venue.owner.name}
               description={venue.description}
               maxGuests={venue.maxGuests}
               price={venue.price}
@@ -77,4 +83,4 @@ const VenueParams = () => {
   );
 };
 
-export default VenueParams;
+export default VenueList;
