@@ -38,9 +38,9 @@ const UserRegister = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid bg-secondary justify-content-center">
       <h1>User Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="d-flex flex-column">
         <label htmlFor="userName">
           <input
             id="userName"

@@ -1,3 +1,6 @@
+import "../../../src/custom.scss";
+import { Button } from "react-bootstrap";
+
 const UserLogout = () => {
   const handleStorageClear = () => {
     sessionStorage.clear();
@@ -6,7 +9,9 @@ const UserLogout = () => {
 
   return (
     <div>
-      <button onClick={handleStorageClear}>Logout</button>
+      <Button variant="danger" onClick={handleStorageClear}>
+        Logout
+      </Button>
     </div>
   );
 };

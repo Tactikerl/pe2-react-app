@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import DisplayUser from "./DisplayUser";
 import { API_MANAGER_ENDPOINT, API_PROFILES, API_HEADERS } from "../utils/url";
+import AvatarChange from "../utils/Avatar";
 
 const user = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("accessToken");
@@ -98,6 +99,7 @@ const UserParams = () => {
         />
         <button type="submit">Change Avatar</button>
       </form>
+      {/* <AvatarChange /> */}
 
       {status === "loading" && <p>Loading...</p>}
       {status === "success" && (

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
 import UserParams from "../common/UserParams";
+import { Button } from "react-bootstrap";
+import "../../../src/custom.scss";
 
 // Refactor and import url from url folder!
 const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
@@ -44,9 +46,9 @@ const VenueList = () => {
   }
 
   return (
-    <div>
-      <form>
-        <label htmlFor="venueSearch">
+    <div className="container justify-content-center">
+      <form className="justify-content-center d-flex">
+        <label htmlFor="venueSearch" className="form-label">
           <input
             type="text"
             id="venueSearch"
@@ -55,9 +57,10 @@ const VenueList = () => {
               setVenueSearch(e.target.value);
             }}
             placeholder="Type to start search"
+            className="form-control"
           />
         </label>
-        <button>Search</button>
+        <Button variant="secondary">Search</Button>
       </form>
       <div>
         <UserParams />
@@ -71,11 +74,14 @@ const VenueList = () => {
             <DisplayVenues
               id={venue.id}
               key={venue.id}
+              image={venue.media}
               name={venue.name}
               owner={venue.owner.name}
               description={venue.description}
               maxGuests={venue.maxGuests}
               price={venue.price}
+              rating={venue.rating}
+              meta={venue.meta}
             />
           ))}
       </div>

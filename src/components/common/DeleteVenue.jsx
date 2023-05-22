@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 const DeleteVenue = ({ id, venueOwner }) => {
   const [isDeleted, setIsDeleted] = useState(false);
@@ -47,7 +48,7 @@ const DeleteVenue = ({ id, venueOwner }) => {
       {error && <p>Error: {error}</p>}
       <p>Are you sure you want to delete this venue?</p>
 
-      <button onClick={handleDelete}>Delete Venue</button>
+      <Button onClick={handleDelete}>Delete Venue</Button>
     </div>
   );
 };

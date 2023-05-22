@@ -1,0 +1,25 @@
+// $primary: #c0d8dd;
+// $secondary: #f7d8cd;
+// $success: #3ecf8e;
+// $info: #fdff83;
+// $danger: #ff5e25;
+// $warning: #ff6c6c;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.multi-line-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-image {
+  height: 300px;
+}
+
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
