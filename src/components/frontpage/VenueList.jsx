@@ -48,7 +48,7 @@ const VenueList = () => {
   return (
     <div className="container justify-content-center">
       <form className="justify-content-center d-flex">
-        <label htmlFor="venueSearch" className="form-label">
+        <div className="input-group">
           <input
             type="text"
             id="venueSearch"
@@ -58,9 +58,10 @@ const VenueList = () => {
             }}
             placeholder="Type to start search"
             className="form-control"
+            aria-label="Search for venues"
           />
-        </label>
-        <Button variant="secondary">Search</Button>
+          <Button variant="secondary">Search</Button>
+        </div>
       </form>
       <div>
         <UserParams />

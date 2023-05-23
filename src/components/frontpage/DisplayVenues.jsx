@@ -11,33 +11,25 @@ function DisplayVenues(props) {
       <Card className="m-4">
         <Row className="g-0">
           <Col md={4} className="card-image">
-            {/* <Card.Img
-              variant="top"
-              src={props.image}
-              style={{ height: "5vh", objectFit: "fill" }}
-            /> */}
             <img
               src={props.image}
               className="h-100 w-100 object-fit-cover img-fluid "
               alt="..."
             ></img>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="bg-info-subtle">
             <Card.Body>
               <Card.Title>{props.name}</Card.Title>
-              <ListGroup className="list-group-flush">
-                <ListGroup.Item>Price : {props.price},- NOK</ListGroup.Item>
-                <ListGroup.Item>
-                  Guest Capacity : {props.maxGuests}
-                </ListGroup.Item>
-                <ListGroup.Item>Owner : {props.owner}</ListGroup.Item>
-                <Card.Text className="multi-line-ellipsis">
-                  {props.description}
-                </Card.Text>
-              </ListGroup>
+
+              <p>Price : {props.price},- NOK</p>
+              <p>Guest Capacity : {props.maxGuests}</p>
+              <p>Owner : {props.owner}</p>
+              <Card.Text className="multi-line-ellipsis">
+                {props.description}
+              </Card.Text>
             </Card.Body>
           </Col>
-          <Col md={2}>
+          <Col md={2} className="bg-warning-subtle">
             <Card.Body>
               <ListGroup>Rating : {props.rating}</ListGroup>
               {Object.keys(props.meta || {}).map((key) => (

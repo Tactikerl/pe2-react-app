@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import UserLogout from "./UserLogout";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
@@ -9,14 +8,12 @@ const Navbar = () => {
   return (
     <Nav>
       <NavDropdown title="Menu" id="nav-dropdown">
-        <NavDropdown.Item>
-          <Link to="/">Home</Link>
-        </NavDropdown.Item>
+        <NavDropdown.Item href="/">Home</NavDropdown.Item>
         <NavDropdown.Divider />
         {isLoggedIn ? (
           <>
-            <NavDropdown.Item>
-              <Link to="./NewVenue">Create New Venue</Link>
+            <NavDropdown.Item href="/NewVenue">
+              Create New Venue
             </NavDropdown.Item>
             <NavDropdown.Item>
               <UserLogout />
@@ -24,12 +21,8 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavDropdown.Item>
-              <Link to="./UserLogin">Login</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="./UserRegister">Register</Link>
-            </NavDropdown.Item>
+            <NavDropdown.Item href="/UserLogin">Login</NavDropdown.Item>
+            <NavDropdown.Item href="/UserRegister">Register</NavDropdown.Item>
           </>
         )}
       </NavDropdown>

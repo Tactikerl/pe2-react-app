@@ -6,6 +6,7 @@ import UserLogin from "./components/userlogin/UserLogin";
 import NewVenue from "./components/newvenue/NewVenue";
 import EditVenue from "./components/venueEdit/EditVenue";
 import Layout from "./components/common/Layout";
+import "../src/custom.scss";
 
 import "./App.css";
 
