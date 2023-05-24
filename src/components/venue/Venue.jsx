@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import ViewVenue from "./ViewVenue";
@@ -11,11 +11,13 @@ import {
 } from "../utils/url";
 import DeleteVenue from "../common/DeleteVenue";
 import EditVenueButton from "../common/EditVenueButton";
+import BookingModal from "./BookingModal";
 
 const Venue = () => {
+  const navigate = useNavigate();
+  const [show, setShow] = useState(false);
   const { id } = useParams();
   const [venue, setVenue] = useState({ rating: 0 });
-
   const [allBookings, setAllBookings] = useState([
     {
       startDate: new Date(),
@@ -76,7 +78,9 @@ const Venue = () => {
   }
 
   function handleGuestsChange(e) {
-    const newGuests = parseInt(e.target.value);
+    console.log(guests, e);
+    const newGuests = !e.target ? parseInt(e) : parseInt(e.target.value);
+    console.log(newGuests);
     if (newGuests <= venue.maxGuests) {
       setGuests(newGuests);
     } else {
@@ -87,7 +91,6 @@ const Venue = () => {
   async function CreateBooking() {
     const token = sessionStorage.getItem("accessToken");
 
-    /** make a check to see that guestNmbr do not exceed maxGuests for the venue id, also make guestNmbr be set at same time with the date selected */
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -109,7 +112,9 @@ const Venue = () => {
 
     fetch(`${API_ALL_BOOKINGS}`, requestOptions)
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) => {
+        setShow(true);
+      })
       .catch((error) => console.log("error", error));
   }
 
@@ -127,6 +132,7 @@ const Venue = () => {
         price={venue.price}
         location={venue.location}
         rating={venue.rating}
+        guests={guests}
         bookingComponent={
           venue.bookings && (
             <DateRange ranges={allBookings} onChange={handleSelect} />
@@ -137,18 +143,32 @@ const Venue = () => {
           sessionStorage.getItem("accessToken") &&
           sessionStorage.getItem("username") &&
           sessionStorage.getItem("email") ? (
-            <button onClick={CreateBooking}>Make Booking</button>
+            <button className="btn btn-primary mt-2" onClick={CreateBooking}>
+              Make Booking
+            </button>
           ) : null
         }
       />
+
       {venue.owner &&
         venue.owner.name &&
         sessionStorage.getItem("username") === venue.owner.name && (
-          <>
-            <DeleteVenue id={venue.id} />
-            <EditVenueButton venueId={venue.id} />
-          </>
+          <div className="row  bg-danger-subtle g-0">
+            <div className="col d-flex gap-3 m-2 justify-content-center">
+              {/* add modal for delete button to confirm deletion */}
+              <DeleteVenue id={venue.id} />
+              <EditVenueButton venueId={venue.id} />
+            </div>
+          </div>
         )}
+
+      <BookingModal
+        show={show}
+        setShow={setShow}
+        handleGoToFront={() => navigate("/")}
+        handleReload={() => window.location.reload()}
+        dates={allBookings.at(-1)}
+      />
     </div>
   );
 };

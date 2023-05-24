@@ -7,7 +7,13 @@ const EditVenueButton = ({ venueId }) => {
     navigate(`/venues/${venueId}/edit`);
   };
 
-  return <button onClick={handleEdit}>Edit Venue</button>;
+  return (
+    <div>
+      <button className="btn btn-warning " onClick={handleEdit}>
+        Edit Your Venue
+      </button>
+    </div>
+  );
 };
 
 export default EditVenueButton;

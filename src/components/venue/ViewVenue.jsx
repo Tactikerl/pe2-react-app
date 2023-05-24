@@ -1,4 +1,4 @@
-import { Badge } from "react-bootstrap";
+import { Badge, Button } from "react-bootstrap";
 import breakfast from "../../assets/icons/breakfast.svg";
 import pets from "../../assets/icons/pawprint.png";
 import parking from "../../assets/icons/parking.svg";
@@ -10,6 +10,8 @@ import user from "../../assets/icons/user.svg";
 import pin from "../../assets/icons/map-pin.svg";
 import dollar from "../../assets/icons/dollar-sign.svg";
 import placeholder from "../../assets/img/placeholder.png";
+import userMinus from "../../assets/icons/user-minus.svg";
+import userPlus from "../../assets/icons/user-plus.svg";
 
 const icons = {
   breakfast,
@@ -27,20 +29,21 @@ const ViewVenue = (props) => {
             .fill("")
             .map((x, index) => (
               <div
-                className="border rounded border-secondary bg-light mb-2 me-1"
+                className=" rounded p-1  bg-light mb-2 me-1"
+                style={{ lineHeight: 0 }}
                 key={index}
               >
                 <svg
+                  style={{ display: "block", float: "left" }}
                   xmlns="http://www.w3.org/2000/svg"
-                  width="30"
-                  height="30"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="#e8b923"
                   stroke="#e8b923"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="feather feather-star"
                 >
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
@@ -108,25 +111,46 @@ const ViewVenue = (props) => {
           </div>
         </div>
       </div>
-      <div className="row mt-2">
-        <div className="col-md-2 ">{props.bookingComponent}</div>
-        <div className="col-md-10">
-          <div>
-            <label htmlFor="guestNumbr">
-              <b>Number of guests</b>
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="guestNumbr"
-              placeholder="Number of guests"
-              min="1"
-              max={props.maxGuests}
-              value={props.guests}
-              onChange={props.handleGuestNumberChange}
-            />
+      <div className="row">
+        <div className="col-lg-8 d-flex gap-3">
+          <div className="">{props.bookingComponent}</div>
+          <div className="flex-grow-1">
+            <h2>Book a stay at {props.name} </h2>
+            <div>
+              <label htmlFor="guestNumbr">
+                <b>Book for how many guests?</b> <br />
+                <p>Max capacity {props.maxGuests}</p>
+              </label>
+              <div className="input-group" style={{ maxWidth: "127px" }}>
+                <button
+                  className="btn btn-primary pe-1 ps-1"
+                  onClick={() =>
+                    props.handleGuestNumberChange(props.guests - 1)
+                  }
+                >
+                  <img src={userMinus} alt="" />
+                </button>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="guestNumbr"
+                  min="1"
+                  max={props.maxGuests}
+                  value={props.guests}
+                  onChange={props.handleGuestNumberChange}
+                />
+                <button
+                  className="btn btn-primary pe-1 ps-1"
+                  onClick={() =>
+                    props.handleGuestNumberChange(props.guests + 1)
+                  }
+                >
+                  <img src={userPlus} alt="" />
+                </button>
+              </div>
+            </div>
+            {props.bookingButton}
           </div>
-          {props.bookingButton}
         </div>
       </div>
     </div>

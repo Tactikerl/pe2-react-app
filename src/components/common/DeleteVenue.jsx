@@ -46,9 +46,9 @@ const DeleteVenue = ({ id, venueOwner }) => {
   return (
     <div>
       {error && <p>Error: {error}</p>}
-      <p>Are you sure you want to delete this venue?</p>
-
-      <Button onClick={handleDelete}>Delete Venue</Button>
+      <Button variant="danger" onClick={handleDelete}>
+        Delete Your Venue
+      </Button>
     </div>
   );
 };
