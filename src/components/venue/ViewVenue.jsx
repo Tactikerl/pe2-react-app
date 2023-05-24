@@ -19,8 +19,35 @@ const icons = {
 };
 const ViewVenue = (props) => {
   return (
-    <div className="">
-      <h1>{props.name}</h1>
+    <div className="bg-info-subtle p-2">
+      <div className="row">
+        <h1>{props.name}</h1>
+        <div className="d-flex">
+          {Array(Math.round(props.rating))
+            .fill("")
+            .map((x, index) => (
+              <div
+                className="border rounded border-secondary bg-light mb-2 me-1"
+                key={index}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  viewBox="0 0 24 24"
+                  fill="#e8b923"
+                  stroke="#e8b923"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="feather feather-star"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              </div>
+            ))}
+        </div>
+      </div>
 
       <div className="venue-image-grid w-100">
         {props.images
@@ -55,30 +82,51 @@ const ViewVenue = (props) => {
           <div className="card bg-warning-subtle">
             <div className="card-body">
               <p>
-                <img src={user}></img> Host: {props.owner?.name}
+                <img src={user}></img> <b>Host</b>: {props.owner?.name}
               </p>
               <p>
                 {" "}
-                <img src={home}></img> Address: {props.location?.address}
+                <img src={home}></img> <b>Address</b>: {props.location?.address}
               </p>
               <p>
                 {" "}
-                <img src={pin}></img> City: {props.location?.city}
+                <img src={pin}></img> <b>City</b>: {props.location?.city}
               </p>
               <p>
                 {" "}
-                <img src={flag}></img> Country: {props.location?.country}
+                <img src={flag}></img> <b>Country</b>: {props.location?.country}
               </p>
               <p>
                 {" "}
-                <img src={users}></img> Guest Capacity : {props.maxGuests}
+                <img src={users}></img> <b>Guest Capacity</b>: {props.maxGuests}
               </p>
               <p>
                 {" "}
-                <img src={dollar}></img> Price : {props.price},- NOK{" "}
+                <img src={dollar}></img> <b>Price</b>: {props.price},- NOK{" "}
               </p>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="row mt-2">
+        <div className="col-md-2 ">{props.bookingComponent}</div>
+        <div className="col-md-10">
+          <div>
+            <label htmlFor="guestNumbr">
+              <b>Number of guests</b>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="guestNumbr"
+              placeholder="Number of guests"
+              min="1"
+              max={props.maxGuests}
+              value={props.guests}
+              onChange={props.handleGuestNumberChange}
+            />
+          </div>
+          {props.bookingButton}
         </div>
       </div>
     </div>

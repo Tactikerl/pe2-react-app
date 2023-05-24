@@ -14,7 +14,8 @@ import EditVenueButton from "../common/EditVenueButton";
 
 const Venue = () => {
   const { id } = useParams();
-  const [venue, setVenue] = useState({});
+  const [venue, setVenue] = useState({ rating: 0 });
+
   const [allBookings, setAllBookings] = useState([
     {
       startDate: new Date(),
@@ -76,7 +77,11 @@ const Venue = () => {
 
   function handleGuestsChange(e) {
     const newGuests = parseInt(e.target.value);
-    setGuests(newGuests);
+    if (newGuests <= venue.maxGuests) {
+      setGuests(newGuests);
+    } else {
+      alert("Number of guests exceeds maximum capacity.");
+    }
   }
 
   async function CreateBooking() {
@@ -121,6 +126,20 @@ const Venue = () => {
         maxGuests={venue.maxGuests}
         price={venue.price}
         location={venue.location}
+        rating={venue.rating}
+        bookingComponent={
+          venue.bookings && (
+            <DateRange ranges={allBookings} onChange={handleSelect} />
+          )
+        }
+        handleGuestNumberChange={handleGuestsChange}
+        bookingButton={
+          sessionStorage.getItem("accessToken") &&
+          sessionStorage.getItem("username") &&
+          sessionStorage.getItem("email") ? (
+            <button onClick={CreateBooking}>Make Booking</button>
+          ) : null
+        }
       />
       {venue.owner &&
         venue.owner.name &&
@@ -130,15 +149,6 @@ const Venue = () => {
             <EditVenueButton venueId={venue.id} />
           </>
         )}
-
-      {venue.bookings && (
-        <DateRange ranges={allBookings} onChange={handleSelect} />
-      )}
-      {sessionStorage.getItem("accessToken") &&
-      sessionStorage.getItem("username") &&
-      sessionStorage.getItem("email") ? (
-        <button onClick={CreateBooking}>Make Booking</button>
-      ) : null}
     </div>
   );
 };
