@@ -9,6 +9,7 @@ import users from "../../assets/icons/users.svg";
 import user from "../../assets/icons/user.svg";
 import pin from "../../assets/icons/map-pin.svg";
 import dollar from "../../assets/icons/dollar-sign.svg";
+import placeholder from "../../assets/img/placeholder.png";
 
 const icons = {
   breakfast,
@@ -24,11 +25,7 @@ const ViewVenue = (props) => {
       <div className="venue-image-grid w-100">
         {props.images
           ?.slice(0, 9)
-          .concat(
-            Array(Math.max(0, 9 - props.images.length)).fill(
-              "/src/assets/img/placeholder.png"
-            )
-          )
+          .concat(Array(Math.max(0, 9 - props.images.length)).fill(placeholder))
           .map((image, index) => (
             <img
               key={index}
