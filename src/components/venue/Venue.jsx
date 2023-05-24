@@ -109,16 +109,18 @@ const Venue = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <ViewVenue
         name={venue.name}
         images={venue.media}
+        description={venue.description}
         owner={venue.owner}
         created={venue.created}
         updated={venue.updated}
         meta={venue.meta}
         maxGuests={venue.maxGuests}
         price={venue.price}
+        location={venue.location}
       />
       {venue.owner &&
         venue.owner.name &&

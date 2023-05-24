@@ -1,38 +1,60 @@
-import { Link } from "react-router-dom";
 import UserLogout from "./UserLogout";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 //import userprofile and set Link to profile!
-const Nav = () => {
+const Navbar = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
   return (
-    <div className="nav-wrapper">
-      <ul className="nav-menu">
-        <li className="nav-menu-item">
-          <Link to="/">Home</Link>
-        </li>
-
+    <Nav>
+      <NavDropdown title="Menu" id="nav-dropdown">
+        <NavDropdown.Item href="/">Home</NavDropdown.Item>
+        <NavDropdown.Divider />
         {isLoggedIn ? (
           <>
-            <li className="nav-menu-item">
+            <NavDropdown.Item href="/NewVenue">
+              Create New Venue
+            </NavDropdown.Item>
+            <NavDropdown.Item>
               <UserLogout />
-            </li>
-            <li className="nav-menu-item">
-              <Link to="./NewVenue">Create New Venue</Link>
-            </li>
+            </NavDropdown.Item>
           </>
         ) : (
           <>
-            <li>
-              <Link to="./UserLogin">Login</Link>
-            </li>
-            <li className="nav-menu-item">
-              <Link to="./UserRegister">Register</Link>
-            </li>
+            <NavDropdown.Item href="/UserLogin">Login</NavDropdown.Item>
+            <NavDropdown.Item href="/UserRegister">Register</NavDropdown.Item>
           </>
         )}
-      </ul>
-    </div>
+      </NavDropdown>
+    </Nav>
+    // <div className="nav-wrapper">
+    //   <ul className="nav-menu">
+    //     <li className="nav-menu-item">
+    //       <Link to="/">Home</Link>
+    //     </li>
+
+    //     {isLoggedIn ? (
+    //       <>
+    //         <li className="nav-menu-item">
+    //           <UserLogout />
+    //         </li>
+    //         <li className="nav-menu-item">
+    //           <Link to="./NewVenue">Create New Venue</Link>
+    //         </li>
+    //       </>
+    //     ) : (
+    //       <>
+    //         <li>
+    //           <Link to="./UserLogin">Login</Link>
+    //         </li>
+    //         <li className="nav-menu-item">
+    //           <Link to="./UserRegister">Register</Link>
+    //         </li>
+    //       </>
+    //     )}
+    //   </ul>
+    // </div>
   );
 };
 
-export default Nav;
+export default Navbar;

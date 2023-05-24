@@ -30,15 +30,17 @@ const DisplayUser = (props) => {
       )}
       {isManager === "true"
         ? userVenues.map((venues) => (
-            <div key={venues.id}>
-              <h3>{venues.name}</h3>
-              <p>{venues.price}</p>
-              <p>{venues.maxGuests}</p>
-              <p>{venues.meta.wifi}</p>
-              <p>{venues.meta.parking}</p>
-              <p>{venues.meta.breakfast}</p>
-              <p>{venues.meta.pets}</p>
-            </div>
+            <Link to={`/venues/${venues.id}`} key={venues.id}>
+              <div>
+                <h3>{venues.name}</h3>
+                <p>{venues.price}</p>
+                <p>{venues.maxGuests}</p>
+                <p>{venues.meta.wifi}</p>
+                <p>{venues.meta.parking}</p>
+                <p>{venues.meta.breakfast}</p>
+                <p>{venues.meta.pets}</p>
+              </div>
+            </Link>
           ))
         : ""}
     </div>

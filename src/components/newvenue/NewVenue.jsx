@@ -181,7 +181,8 @@ const NewVenue = () => {
           <input
             type="text"
             value={venueLocation.address}
-            onChange={handleLocationChange}
+            name="address"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
         <label>
@@ -189,7 +190,8 @@ const NewVenue = () => {
           <input
             type="text"
             value={venueLocation.city}
-            onChange={handleLocationChange}
+            name="city"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
         <label>
@@ -197,7 +199,8 @@ const NewVenue = () => {
           <input
             type="text"
             value={venueLocation.zip}
-            onChange={handleLocationChange}
+            name="zip"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
         <label>
@@ -205,7 +208,8 @@ const NewVenue = () => {
           <input
             type="text"
             value={venueLocation.country}
-            onChange={handleLocationChange}
+            name="country"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
         <label>
@@ -213,7 +217,8 @@ const NewVenue = () => {
           <input
             type="number"
             value={venueLocation.lat}
-            onChange={handleLocationChange}
+            name="lat"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
         <label>
@@ -221,7 +226,8 @@ const NewVenue = () => {
           <input
             type="number"
             value={venueLocation.lng}
-            onChange={handleLocationChange}
+            name="lng"
+            onChange={(e) => handleLocationChange(e)}
           />
         </label>
 

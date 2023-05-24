@@ -38,47 +38,59 @@ const UserRegister = () => {
   };
 
   return (
-    <div>
-      <h1>User Register</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="userName">
+    <div className="container-fluid justify-content-center row">
+      <form
+        onSubmit={handleSubmit}
+        className="col-md-6 d-flex bg-info-subtle flex-column justify-content-center"
+      >
+        <h3>User Register</h3>
+        <label htmlFor="userName" className="form-label">
           <input
             id="userName"
             type="text"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             placeholder="Your user name"
+            className="form-control"
           />
         </label>
-        <label htmlFor="email">
+        <label htmlFor="email" className="form-label">
           <input
             id="email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
+            className="form-control"
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="form-label">
           <input
             type="password"
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Your password"
+            className="form-control"
           />
         </label>
-        <label htmlFor="admin">
-          <input
-            id="admin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={() => setIsAdmin(!isAdmin)}
-          />
-          Check box if VenueAdmin
-        </label>
-        <button type="submit">Register</button>
+        <div className="form-check">
+          <label htmlFor="admin" className="form-check-label">
+            <input
+              id="admin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={() => setIsAdmin(!isAdmin)}
+              className="form-check-input"
+            />
+            Check box if Venue Admin
+          </label>
+        </div>
+        <button type="submit" className="btn bg-warning-subtle">
+          Register
+        </button>
       </form>
+      <div className="col-md-6 bg-login-register"></div>
     </div>
   );
 };

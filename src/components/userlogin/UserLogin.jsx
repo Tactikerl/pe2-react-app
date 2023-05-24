@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { API_LOGIN } from "../utils/url";
+import { Button } from "react-bootstrap";
+
+import "../../../src/custom.scss";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -43,26 +46,34 @@ const UserLogin = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleLogin}>
-        <label>
+    <div className="container-fluid justify-content-center row g-0">
+      <form
+        onSubmit={handleLogin}
+        className="col-md-6 d-flex bg-info-subtle flex-column justify-content-center px-5"
+      >
+        <label htmlFor="Email" className="form-label">
           Email:
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="form-control"
           />
         </label>
-        <label>
+        <label htmlFor="Password" className="form-label">
           Password:
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="form-control"
           />
         </label>
-        <button>Login</button>
+        <Button type="submit" variant="success">
+          Login
+        </Button>
       </form>
+      <div className="col-md-6 bg-login-register"></div>
     </div>
   );
 };
