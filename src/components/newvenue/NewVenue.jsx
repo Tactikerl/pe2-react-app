@@ -84,154 +84,182 @@ const NewVenue = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Venue Name:
-          <input
-            type="text"
-            value={venueName}
-            onChange={(e) => setVenueName(e.target.value)}
-            placeholder="Venue Name.."
-            required
-          />
-        </label>
-        <label>
-          Description of the Venue
-          <input
-            type="text"
-            value={venueInfo}
-            onChange={(e) => setVenueInfo(e.target.value)}
-            placeholder="Text here..."
-            required
-          />
-        </label>
-        <div>
-          {venueImages.map((imageElement, index) => (
-            <div key={index}>{imageElement}</div>
-          ))}
-          <label>
-            Add image url
+    <div className="container-fluid justify-content-center">
+      <form onSubmit={handleSubmit} className="row">
+        <div className="col-md-6">
+          <label className="form-label w-100">
+            Venue Name:
             <input
               type="text"
-              ref={imageElement}
-              placeholder="Paste Url for venue images here"
+              value={venueName}
+              id="venueName"
+              onChange={(e) => setVenueName(e.target.value)}
+              required
+              className="form-control"
             />
-            <button
-              onClick={() => {
-                handleVenueImages(imageElement.current.value);
-              }}
-            >
-              Add
-            </button>
+          </label>
+          <label className="form-label w-100">
+            Description of the Venue
+            <input
+              type="textarea"
+              value={venueInfo}
+              id="venueInfo"
+              onChange={(e) => setVenueInfo(e.target.value)}
+              className="form-control"
+              required
+            />
+          </label>
+          <label className="form-label w-100">
+            Address
+            <input
+              type="text"
+              value={venueLocation.address}
+              name="address"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+          <label className="form-label w-100">
+            City
+            <input
+              type="text"
+              value={venueLocation.city}
+              name="city"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+          <label className="form-label w-100">
+            ZIP
+            <input
+              type="text"
+              value={venueLocation.zip}
+              name="zip"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+          <label className="form-label w-100">
+            Country
+            <input
+              type="text"
+              value={venueLocation.country}
+              name="country"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+          <label className="form-label w-100">
+            Latitude
+            <input
+              type="number"
+              value={venueLocation.lat}
+              name="lat"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+          <label className="form-label w-100">
+            Longitude
+            <input
+              type="number"
+              value={venueLocation.lng}
+              name="lng"
+              onChange={(e) => handleLocationChange(e)}
+              className="form-control"
+            />
+          </label>
+
+          <label className="form-label w-100">
+            Price per night in NOK
+            <input
+              type="number"
+              value={venuePrice}
+              className="form-control"
+              onChange={(e) => setVenuePrice(e.target.value)}
+              required
+            />
+          </label>
+          <label className="form-label w-100">
+            Number of Guests?
+            <input
+              type="number"
+              value={maxGuests}
+              onChange={(e) => setMaxGuests(e.target.value)}
+              className="form-control"
+              required
+            />
           </label>
         </div>
-        <label>
-          Price per night in NOK
-          <input
-            type="number"
-            value={venuePrice}
-            onChange={(e) => setVenuePrice(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Number of Guests?
-          <input
-            type="number"
-            value={maxGuests}
-            onChange={(e) => setMaxGuests(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Wifi?
-          <input
-            type="checkbox"
-            checked={venueMeta.wifi}
-            onChange={() => handleMetaChange("wifi")}
-          />
-        </label>
-        <label>
-          Parking?
-          <input
-            type="checkbox"
-            checked={venueMeta.parking}
-            onChange={() => handleMetaChange("parking")}
-          />
-        </label>
-        <label>
-          Breakfast?
-          <input
-            type="checkbox"
-            checked={venueMeta.breakfast}
-            onChange={() => handleMetaChange("breakfast")}
-          />
-        </label>
-        <label>
-          Pets?
-          <input
-            type="checkbox"
-            checked={venueName.pets}
-            onChange={() => handleMetaChange("pets")}
-          />
-        </label>
-        <label>
-          Address
-          <input
-            type="text"
-            value={venueLocation.address}
-            name="address"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
-        <label>
-          City
-          <input
-            type="text"
-            value={venueLocation.city}
-            name="city"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
-        <label>
-          ZIP
-          <input
-            type="text"
-            value={venueLocation.zip}
-            name="zip"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
-        <label>
-          Country
-          <input
-            type="text"
-            value={venueLocation.country}
-            name="country"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
-        <label>
-          Latitude
-          <input
-            type="number"
-            value={venueLocation.lat}
-            name="lat"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
-        <label>
-          Longitude
-          <input
-            type="number"
-            value={venueLocation.lng}
-            name="lng"
-            onChange={(e) => handleLocationChange(e)}
-          />
-        </label>
+        <div className="col-md-6">
+          <div>
+            {venueImages.map((imageElement, index) => (
+              <div key={index}>{imageElement}</div>
+            ))}
+            <label className="form-label w-100">
+              Add image url
+              <div className="input-group">
+                <input type="url" ref={imageElement} className="form-control" />
+                <button
+                  className="btn btn-primary"
+                  onClick={() => {
+                    handleVenueImages(imageElement.current.value);
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+            </label>
+          </div>
+          <div className="form-check">
+            <label className="form-check-label">
+              Wifi?
+              <input
+                type="checkbox"
+                checked={venueMeta.wifi}
+                onChange={() => handleMetaChange("wifi")}
+                className="form-check-input"
+              />
+            </label>
+          </div>
+          <div className="form-check">
+            <label className="form-check-label">
+              Parking?
+              <input
+                type="checkbox"
+                checked={venueMeta.parking}
+                className="form-check-input"
+                onChange={() => handleMetaChange("parking")}
+              />
+            </label>
+          </div>
+          <div className="form-check">
+            <label className="form-check-label">
+              Breakfast?
+              <input
+                type="checkbox"
+                checked={venueMeta.breakfast}
+                onChange={() => handleMetaChange("breakfast")}
+                className="form-check-input"
+              />
+            </label>
+          </div>
+          <div className="form-check">
+            <label className="form-check-label">
+              Pets?
+              <input
+                type="checkbox"
+                checked={venueName.pets}
+                onChange={() => handleMetaChange("pets")}
+                className="form-check-input"
+              />
+            </label>
+          </div>
+        </div>
 
-        <button type="submit">Create Venue</button>
+        <button className="btn btn-primary" type="submit">
+          Create Venue
+        </button>
       </form>
     </div>
   );

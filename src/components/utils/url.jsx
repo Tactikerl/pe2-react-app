@@ -35,3 +35,5 @@ export const API_CREATE_BOOKING = `https://nf-api.onrender.com/api/v1/holidaze/b
 export const API_BOOKING_ID = `https://nf-api.onrender.com/api/v1/holidaze/bookings/?_customer=true&_venue=true`;
 
 export const API_DELETE_BOOKING = `https://nf-api.onrender.com/api/v1/holidaze/bookings/`;
+
+export const API_BOOKINGS_TRUE = "/venues?_owner=true&_bookings=true";

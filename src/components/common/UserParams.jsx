@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import DisplayUser from "./DisplayUser";
 import { API_MANAGER_ENDPOINT, API_PROFILES, API_HEADERS } from "../utils/url";
-import AvatarChange from "../utils/Avatar";
 
 const user = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("accessToken");
@@ -84,31 +83,17 @@ const UserParams = () => {
   }
 
   return (
-    <div>
-      <h1>{userData.name}</h1>
-      <img src={userData.avatar} alt={`Profile avatar for ${userData.name}`} />
-
-      {/* Avatar change form */}
-      <form onSubmit={handleAvatarChange}>
-        <input
-          type="text"
-          value={newAvatar}
-          onChange={(e) => setNewAvatar(e.target.value)}
-          placeholder="New Avatar URL"
-          required
-        />
-        <button type="submit">Change Avatar</button>
-      </form>
-      {/* <AvatarChange /> */}
-
+    <div className="container">
       {status === "loading" && <p>Loading...</p>}
       {status === "success" && (
         <DisplayUser
-          user={userData.name}
-          avatar={userData.avatar}
+          user={userData}
           userBookings={userData.bookings}
           showVenuesLink={isManager === "true"}
           userVenues={isManager === "true" ? userData.venues : null}
+          handleAvatarChange={handleAvatarChange}
+          newAvatar={newAvatar}
+          setNewAvatar={setNewAvatar}
         />
       )}
     </div>

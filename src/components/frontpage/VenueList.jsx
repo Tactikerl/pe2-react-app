@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
-import UserParams from "../common/UserParams";
+
 import { Button } from "react-bootstrap";
 import "../../../src/custom.scss";
 
