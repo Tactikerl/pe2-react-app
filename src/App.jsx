@@ -6,9 +6,11 @@ import UserLogin from "./components/userlogin/UserLogin";
 import NewVenue from "./components/newvenue/NewVenue";
 import EditVenue from "./components/venueEdit/EditVenue";
 import Layout from "./components/common/Layout";
+
 import "../src/custom.scss";
 
 import "./App.css";
+import UserParams from "./components/common/UserParams";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/NewVenue" element={<NewVenue />} />
           <Route path="/UserLogin" element={<UserLogin />} />
           <Route path="/venues/:id/edit" element={<EditVenue />} />
+          <Route path="/profiles/:name" element={<UserParams />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Layout>
     </BrowserRouter>

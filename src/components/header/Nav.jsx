@@ -2,7 +2,6 @@ import UserLogout from "./UserLogout";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
-//import userprofile and set Link to profile!
 const Navbar = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
   return (
@@ -12,6 +11,7 @@ const Navbar = () => {
         <NavDropdown.Divider />
         {isLoggedIn ? (
           <>
+            <NavDropdown.Item href="/profiles/:name">Profile</NavDropdown.Item>
             <NavDropdown.Item href="/NewVenue">
               Create New Venue
             </NavDropdown.Item>
@@ -27,33 +27,6 @@ const Navbar = () => {
         )}
       </NavDropdown>
     </Nav>
-    // <div className="nav-wrapper">
-    //   <ul className="nav-menu">
-    //     <li className="nav-menu-item">
-    //       <Link to="/">Home</Link>
-    //     </li>
-
-    //     {isLoggedIn ? (
-    //       <>
-    //         <li className="nav-menu-item">
-    //           <UserLogout />
-    //         </li>
-    //         <li className="nav-menu-item">
-    //           <Link to="./NewVenue">Create New Venue</Link>
-    //         </li>
-    //       </>
-    //     ) : (
-    //       <>
-    //         <li>
-    //           <Link to="./UserLogin">Login</Link>
-    //         </li>
-    //         <li className="nav-menu-item">
-    //           <Link to="./UserRegister">Register</Link>
-    //         </li>
-    //       </>
-    //     )}
-    //   </ul>
-    // </div>
   );
 };
 

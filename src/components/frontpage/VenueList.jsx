@@ -63,9 +63,7 @@ const VenueList = () => {
           <Button variant="secondary">Search</Button>
         </div>
       </form>
-      <div>
-        <UserParams />
-      </div>
+
       <div className="venue-list">
         {fetchVenues
           .filter((venues) =>
