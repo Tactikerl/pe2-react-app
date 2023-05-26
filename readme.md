@@ -24,10 +24,64 @@ node version v16.17.0
    <li> A registered user may logout</li>
 </ul>
 
+We were also given restrictions and requirements from the "Owner" that we were to adhere to during the development and production.
+
+## Technical Restrictions
+
+## The company CTO has set the following technical restrictions:
+
+    Must use an approved JavaScript Framework
+    Must use an approved CSS Framework
+    Must be hosted on an approved Static Host
+    Must use an approved Design Application
+    Must use an approved Planning Application
+
+## Required Links
+
+The Product Owner has requested links to the following:
+
+    [A Gantt chart for project timing](https://github.com/users/Tactikerl/projects/3/views/1)
+    [A design prototype] (https://www.figma.com/file/EGQKKf8YpZcJCBwlSz7ubL/pe2-design-prototype-and-style-guide?type=design&node-id=0%3A1&t=MsQsYazs260mRuHz-1)
+    [A style guide]()
+    [A kanban project board](https://github.com/users/Tactikerl/projects/3/views/2)
+    [A repository link](https://github.com/Tactikerl/pe2-react-app.git)
+    [A hosted application demo link](https://pe2-kmk-holidaze.netlify.app/)
+
+## Approved Resources
+
+This list covers libraries and services that have been vetted by the company and approved for use. ** I've marked the selected resources with <b>Bold</b> text **
+
+    JavaScript Framework
+        <b>React (>16)</b>
+
+    CSS Frameworks
+        <b> Bootstrap (>5)</b>
+        Tailwind (>3)
+        MUI (>5)
+        Styled Components
+        CSS Modules
+
+Hosting Services
+
+    GitHub Pages
+    <b> Netlify</b>
+
+Design Applications
+
+    Adobe XD
+     <b>Figma</b>
+    Sketch
+
+Planning Applications
+
+    Trello
+     <b>GitHub Projects
+
 <h2 align="center">Built With</h2>
 
 - React [React.js][https://react.dev/]
 - Vite [Vite.js][https://vitejs.dev/]
+- Bootstrap [Bootstrap.com][https://getbootstrap.com/]
 
 <h2>Getting Started</h2>
 <p>To run the project locally on your computer you can follow these steps.</p>
