@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { API_FETCH_VENUE } from "../utils/url";
 
 const DeleteVenue = ({ id, venueOwner }) => {
   const [isDeleted, setIsDeleted] = useState(false);
@@ -22,10 +23,7 @@ const DeleteVenue = ({ id, venueOwner }) => {
         },
       };
 
-      const response = await fetch(
-        `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`,
-        requestOptions
-      );
+      const response = await fetch(`${API_FETCH_VENUE}${id}`, requestOptions);
 
       if (!response.ok) {
         throw new Error("Failed to delete the venue.");

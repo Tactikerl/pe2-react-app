@@ -3,10 +3,9 @@ import VenueList from "./components/frontpage/VenueList";
 import Venue from "./components/venue/Venue";
 import UserRegister from "./components/userregister/UserRegister";
 import UserLogin from "./components/userlogin/UserLogin";
-import NewVenue from "./components/newvenue/NewVenue";
-import EditVenue from "./components/venueEdit/EditVenue";
+import NewVenue from "./components/manageVenues/NewVenue";
+import EditVenue from "./components/manageVenues/EditVenue";
 import Layout from "./components/common/Layout";
-
 import "../src/custom.scss";
 
 import "./App.css";

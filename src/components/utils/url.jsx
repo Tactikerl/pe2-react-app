@@ -18,6 +18,8 @@ export const API_PROFILES = `https://nf-api.onrender.com/api/v1/holidaze/profile
 
 export const API_VENUES = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
+export const API_VENUES_PGN = `https://nf-api.onrender.com/api/v1/holidaze/venues?sort=rating&sortOrder=desc&limit=10&_owner=true&_bookings=true&offset=`;
+
 export const API_CREATE = `https://nf-api.onrender.com/api/v1/holidaze/venues`;
 
 export const API_FETCH_VENUE = `https://nf-api.onrender.com/api/v1/holidaze/venues/`;

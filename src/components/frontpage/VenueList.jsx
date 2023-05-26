@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
-
+import { API_VENUES_PGN } from "../utils/url";
 import { Button } from "react-bootstrap";
 import "../../../src/custom.scss";
-
-// Refactor and import url from url folder!
-const url = `https://nf-api.onrender.com/api/v1/holidaze/venues?_owner=true&_bookings=true`;
 
 const VenueList = () => {
   const [fetchVenues, setFetchVenues] = useState([]);
@@ -14,12 +11,14 @@ const VenueList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(0);
+
   useEffect(() => {
     async function requestFetchVenues() {
       try {
         setHasError(false);
         setIsLoading(true);
-        const res = await fetch(url);
+        const res = await fetch(API_VENUES_PGN + currentPage * 10);
         const contentType = res.headers.get(`Content-Type`);
         if (contentType && contentType.includes("application/json")) {
           const json = await res.json();
@@ -35,7 +34,7 @@ const VenueList = () => {
       }
     }
     requestFetchVenues();
-  }, []);
+  }, [currentPage]);
 
   if (isLoading) {
     return <div>Loading posts</div>;
@@ -83,6 +82,33 @@ const VenueList = () => {
               meta={venue.meta}
             />
           ))}
+      </div>
+      <div>
+        <nav aria-label="Venue list navigation">
+          <ul className="pagination justify-content-center">
+            <li className="page-item">
+              <button
+                onClick={() =>
+                  currentPage > 0 && setCurrentPage(currentPage - 1)
+                }
+                className="page-link"
+              >
+                Previous
+              </button>
+            </li>
+            <li className="page-item">
+              <span className="page-link active">{currentPage + 1}</span>
+            </li>
+            <li className="page-item">
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="page-link"
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
