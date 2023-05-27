@@ -8,6 +8,7 @@ import parking from "../../assets/icons/parking.svg";
 import wifi from "../../assets/icons/wifi.svg";
 import { useEffect, useState } from "react";
 import { API_BOOKINGS_TRUE, API_PROFILES, API_HEADERS } from "../utils/url";
+import Facilities from "./Facilities";
 
 const icons = {
   breakfast,
@@ -70,7 +71,8 @@ const VenueManager = ({ user, token }) => {
               <p>
                 <img src={users}></img> : {venue.maxGuests}
               </p>
-              {Object.keys(venue?.meta || {}).map((key) =>
+              <Facilities meta={venue.meta} />
+              {/* {Object.keys(venue?.meta || {}).map((key) =>
                 venue.meta[key] ? (
                   <Badge
                     bg="info"
@@ -81,7 +83,7 @@ const VenueManager = ({ user, token }) => {
                     {<img height={25} width={25} src={icons[key]}></img>}
                   </Badge>
                 ) : null
-              )}
+              )} */}
               {venue.bookings?.length > 0 && <h4>Bookings</h4>}
               <div className="card">
                 <ul className="list-group list-group-flush">

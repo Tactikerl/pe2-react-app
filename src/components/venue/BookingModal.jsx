@@ -11,7 +11,6 @@ const dateOptions = {
 };
 
 function BookingModal(props) {
-  console.log(props.dates);
   return (
     <>
       <Modal centered show={props.show} onHide={props.handleGoToFront}>

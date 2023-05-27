@@ -12,6 +12,11 @@ import {
 import DeleteVenue from "../common/DeleteVenue";
 import EditVenueButton from "../common/EditVenueButton";
 import BookingModal from "./BookingModal";
+import { findAvailableDate, getDatesBetween } from "../utils/dateHandling";
+
+var tomorrow = new Date();
+tomorrow.setHours(0, 0, 0, 0);
+tomorrow.setDate(tomorrow.getDate() + 1);
 
 const Venue = () => {
   const navigate = useNavigate();
@@ -25,6 +30,7 @@ const Venue = () => {
       key: "selection",
     },
   ]);
+  const [disabledDates, setDisabledDates] = useState([]);
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -51,14 +57,23 @@ const Venue = () => {
       };
     });
 
+    let disabledDateLists = json.bookings.map((booking) => {
+      return getDatesBetween(booking.dateFrom, booking.dateTo);
+    });
+    let disabledList = disabledDateLists.flat();
+    console.log(disabledList);
+
+    let availableDate = findAvailableDate(tomorrow, disabledList);
+    console.log(availableDate);
+
     bookings.push({
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: availableDate,
+      endDate: availableDate,
       color: "#eb4034",
     });
-    console.log(bookings);
 
     setAllBookings(bookings);
+    setDisabledDates(disabledList);
   }
 
   function handleSelect(date) {
@@ -74,13 +89,11 @@ const Venue = () => {
       }
     });
     setAllBookings(nextCounters);
-    console.log(date);
   }
 
   function handleGuestsChange(e) {
-    console.log(guests, e);
     const newGuests = !e.target ? parseInt(e) : parseInt(e.target.value);
-    console.log(newGuests);
+
     if (newGuests <= venue.maxGuests) {
       setGuests(newGuests);
     } else {
@@ -135,19 +148,23 @@ const Venue = () => {
         guests={guests}
         bookingComponent={
           venue.bookings && (
-            <DateRange ranges={allBookings} onChange={handleSelect} />
+            <DateRange
+              ranges={allBookings}
+              disabledDates={disabledDates}
+              onChange={handleSelect}
+              minDate={tomorrow}
+            />
           )
         }
+        startDate={allBookings.at(-1).startDate}
+        endDate={allBookings.at(-1).endDate}
         handleGuestNumberChange={handleGuestsChange}
-        bookingButton={
+        userLoggedIn={
           sessionStorage.getItem("accessToken") &&
           sessionStorage.getItem("username") &&
-          sessionStorage.getItem("email") ? (
-            <button className="btn btn-primary mt-2" onClick={CreateBooking}>
-              Make Booking
-            </button>
-          ) : null
+          sessionStorage.getItem("email")
         }
+        createBooking={CreateBooking}
       />
 
       {venue.owner &&

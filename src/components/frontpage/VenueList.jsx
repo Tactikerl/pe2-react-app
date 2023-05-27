@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
-import { API_VENUES_PGN } from "../utils/url";
+import { API_VENUES_PGN, API_VENUES_SRT } from "../utils/url";
 import { Button } from "react-bootstrap";
 import "../../../src/custom.scss";
+
+const sorting = [
+  { sort: "name", order: "asc", label: "Name" },
+  { sort: "price", order: "asc", label: "Price" },
+  { sort: "maxGuests", order: "desc", label: "Capacity" },
+  { sort: "rating", order: "desc", label: "Rating" },
+];
 
 const VenueList = () => {
   const [fetchVenues, setFetchVenues] = useState([]);
@@ -12,17 +19,30 @@ const VenueList = () => {
   const [hasError, setHasError] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(0);
+  const [sortParam, setSortParam] = useState(sorting[0]);
 
   useEffect(() => {
     async function requestFetchVenues() {
       try {
         setHasError(false);
         setIsLoading(true);
-        const res = await fetch(API_VENUES_PGN + currentPage * 10);
+        const res = await fetch(
+          API_VENUES_SRT(10, 10 * currentPage, sortParam.sort, sortParam.order)
+        );
+
         const contentType = res.headers.get(`Content-Type`);
         if (contentType && contentType.includes("application/json")) {
           const json = await res.json();
-          setFetchVenues(json);
+          setFetchVenues((prevState) => {
+            let newList = [...prevState, ...json];
+            let uniqueList = newList.filter(
+              (item, index) =>
+                newList.findIndex((item2) => item2.id === item.id) === index
+            );
+
+            return uniqueList;
+          });
+
           setIsLoading(false);
         } else {
           setIsLoading(false);
@@ -34,11 +54,7 @@ const VenueList = () => {
       }
     }
     requestFetchVenues();
-  }, [currentPage]);
-
-  if (isLoading) {
-    return <div>Loading posts</div>;
-  }
+  }, [currentPage, sortParam]);
 
   if (hasError) {
     return <div>Error Loading Data</div>;
@@ -46,40 +62,78 @@ const VenueList = () => {
 
   return (
     <div className="container justify-content-center">
-      <form className="justify-content-center d-flex">
-        <div className="input-group">
-          <input
-            type="text"
-            id="venueSearch"
-            value={venueSearch}
-            onChange={(e) => {
-              setVenueSearch(e.target.value);
-            }}
-            placeholder="Type to start search"
-            className="form-control"
-            aria-label="Search for venues"
-          />
-          <Button variant="secondary">Search</Button>
+      <form className="row">
+        <div className="col-md-8 mb-2">
+          <div className="input-group">
+            <input
+              type="text"
+              id="venueSearch"
+              value={venueSearch}
+              onChange={(e) => {
+                setVenueSearch(e.target.value);
+              }}
+              placeholder="Type to start search"
+              className="form-control"
+              aria-label="Search for venues"
+            />
+            <Button type="button" variant="secondary">
+              Search
+            </Button>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="">
+            <label className="d-flex gap-1 align-items-center">
+              <span className="text-nowrap">Sort by:</span>
+              <select
+                className="form-select"
+                name="sort"
+                id="sort"
+                onChange={(e) => {
+                  setSortParam(sorting[e.target.value]);
+                  setFetchVenues([]);
+                  setCurrentPage(0);
+                }}
+              >
+                {sorting.map((sort, index) => (
+                  <option key={sort.sort} value={index}>
+                    {sort.label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         </div>
       </form>
 
       <div className="venue-list">
         {fetchVenues
-          .filter((venues) =>
-            venues.name.toLowerCase().includes(venueSearch.toLowerCase())
+          .filter(
+            (venues) =>
+              venues.name.toLowerCase().includes(venueSearch.toLowerCase()) ||
+              venues.location.country
+                .toLowerCase()
+                .includes(venueSearch.toLowerCase()) ||
+              venues.location.city
+                .toLowerCase()
+                .includes(venueSearch.toLowerCase()) ||
+              venues.description
+                .toLowerCase()
+                .includes(venueSearch.toLowerCase())
           )
           .map((venue) => (
             <DisplayVenues
               id={venue.id}
-              key={venue.id}
+              key={venue.id + currentPage}
               image={venue.media}
               name={venue.name}
-              owner={venue.owner.name}
+              owner={venue.owner}
               description={venue.description}
               maxGuests={venue.maxGuests}
               price={venue.price}
               rating={venue.rating}
               meta={venue.meta}
+              location={venue.location}
             />
           ))}
       </div>
@@ -89,11 +143,14 @@ const VenueList = () => {
             <li className="page-item">
               <button
                 onClick={() =>
-                  currentPage > 0 && setCurrentPage(currentPage - 1)
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  })
                 }
                 className="page-link"
               >
-                Previous
+                Back to Top
               </button>
             </li>
             <li className="page-item">
@@ -104,7 +161,7 @@ const VenueList = () => {
                 onClick={() => setCurrentPage(currentPage + 1)}
                 className="page-link"
               >
-                Next
+                Load more venues
               </button>
             </li>
           </ul>

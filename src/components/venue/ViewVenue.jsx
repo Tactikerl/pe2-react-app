@@ -1,30 +1,25 @@
-import { Badge, Button } from "react-bootstrap";
-import breakfast from "../../assets/icons/breakfast.svg";
-import pets from "../../assets/icons/pawprint.png";
-import parking from "../../assets/icons/parking.svg";
-import wifi from "../../assets/icons/wifi.svg";
-import flag from "../../assets/icons/flag.svg";
-import home from "../../assets/icons/home.svg";
-import users from "../../assets/icons/users.svg";
-import user from "../../assets/icons/user.svg";
-import pin from "../../assets/icons/map-pin.svg";
-import dollar from "../../assets/icons/dollar-sign.svg";
 import placeholder from "../../assets/img/placeholder.png";
 import userMinus from "../../assets/icons/user-minus.svg";
 import userPlus from "../../assets/icons/user-plus.svg";
 import Rating from "../common/Rating";
+import Facilities from "../common/Facilities";
+import VenueAttributes from "../common/VenueAttributes";
 
-const icons = {
-  breakfast,
-  pets,
-  parking,
-  wifi,
-};
 const ViewVenue = (props) => {
+  function calculateDays(start, end) {
+    const diffTime = Math.abs(end - start);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  }
+
+  let days = calculateDays(props.startDate, props.endDate);
+
   return (
     <div className="bg-info-subtle p-2">
       <div className="row">
-        <h1>{props.name}</h1>
+        <h1>
+          {props.name}, {props.location?.city}
+        </h1>
         <Rating rating={props.rating} />
       </div>
 
@@ -42,90 +37,83 @@ const ViewVenue = (props) => {
           ))}
       </div>
       <div className="row mt-3">
-        <div className="col-md-8">
-          {Object.keys(props.meta || {}).map((key) =>
-            props.meta[key] ? (
-              <Badge
-                bg="info"
-                className="fs-3 text-bg-info me-2 mb-2"
-                key={key}
-              >
-                {key.charAt(0).toUpperCase() + key.slice(1)}{" "}
-                {<img height={50} width={50} src={icons[key]}></img>}
-              </Badge>
-            ) : null
-          )}
+        <div className="col-lg-7">
+          <Facilities meta={props.meta} />
           <p className="mt-2 fs-5">{props.description}</p>
-        </div>
-        <div className="col-md-4">
           <div className="card bg-warning-subtle">
             <div className="card-body">
-              <p>
-                <img src={user}></img> <b>Host</b>: {props.owner?.name}
-              </p>
-              <p>
-                {" "}
-                <img src={home}></img> <b>Address</b>: {props.location?.address}
-              </p>
-              <p>
-                {" "}
-                <img src={pin}></img> <b>City</b>: {props.location?.city}
-              </p>
-              <p>
-                {" "}
-                <img src={flag}></img> <b>Country</b>: {props.location?.country}
-              </p>
-              <p>
-                {" "}
-                <img src={users}></img> <b>Guest Capacity</b>: {props.maxGuests}
-              </p>
-              <p>
-                {" "}
-                <img src={dollar}></img> <b>Price</b>: {props.price},- NOK{" "}
-              </p>
+              <VenueAttributes
+                owner={props.owner}
+                location={props.location}
+                maxGuests={props.maxGuests}
+                price={props.price}
+              />
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col-lg-8 d-flex gap-3">
-          <div className="">{props.bookingComponent}</div>
-          <div className="flex-grow-1">
-            <h2>Book a stay at {props.name} </h2>
-            <div>
-              <label htmlFor="guestNumbr">
-                <b>Book for how many guests?</b> <br />
-                <p>Max capacity {props.maxGuests}</p>
-              </label>
-              <div className="input-group" style={{ maxWidth: "127px" }}>
-                <button
-                  className="btn btn-primary pe-1 ps-1"
-                  onClick={() =>
-                    props.handleGuestNumberChange(props.guests - 1)
-                  }
-                >
-                  <img src={userMinus} alt="" />
-                </button>
-                <input
-                  type="number"
-                  className="form-control"
-                  id="guestNumbr"
-                  min="1"
-                  max={props.maxGuests}
-                  value={props.guests}
-                  onChange={props.handleGuestNumberChange}
-                />
-                <button
-                  className="btn btn-primary pe-1 ps-1"
-                  onClick={() =>
-                    props.handleGuestNumberChange(props.guests + 1)
-                  }
-                >
-                  <img src={userPlus} alt="" />
-                </button>
+        <div className="col-lg-5  ">
+          <div className="bg-light d-flex flex-column align-items-center gap-1 p-3 rounded">
+            <h2 className="fs-4">
+              <b>{props.price} NOK</b> /night
+            </h2>
+            <div className="">{props.bookingComponent}</div>
+
+            <label
+              htmlFor="guestNumbr"
+              className="
+            align-self-start"
+            >
+              <b>Guests</b> <br />
+            </label>
+            <div className="input-group">
+              <button
+                className="btn btn-primary "
+                onClick={() =>
+                  props.guests > 1 &&
+                  props.handleGuestNumberChange(props.guests - 1)
+                }
+              >
+                <img src={userMinus} alt="" />
+              </button>
+
+              <input
+                type="number"
+                className="form-control"
+                id="guestNumbr"
+                min="1"
+                max={props.maxGuests}
+                value={props.guests}
+                onChange={props.handleGuestNumberChange}
+              />
+              <button
+                className="btn btn-primary"
+                onClick={() => props.handleGuestNumberChange(props.guests + 1)}
+              >
+                <img src={userPlus} alt="" />
+              </button>
+            </div>
+            <div className="align-self-start">
+              <p className="text-dark text-opacity-50">
+                Max capacity {props.maxGuests}
+              </p>
+            </div>
+            <div className="d-flex justify-content-between w-100">
+              <div>
+                {props.price}NOK x {days} nights
+              </div>
+              <div>
+                Total <b>{days * props.price} NOK</b>
               </div>
             </div>
-            {props.bookingButton}
+            {props.userLoggedIn && (
+              <button
+                disabled={days === 0}
+                className="btn btn-primary mt-2 w-100"
+                onClick={props.CreateBooking}
+              >
+                Book now
+              </button>
+            )}
           </div>
         </div>
       </div>
