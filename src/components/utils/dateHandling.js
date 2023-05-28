@@ -4,7 +4,9 @@ export function getDatesBetween(start, end) {
   let endDate = new Date(end);
 
   while (currentDate <= endDate) {
-    dates.push(new Date(currentDate));
+    let newDate = new Date(currentDate);
+    newDate.setHours(0, 0, 0, 0);
+    dates.push(newDate);
     currentDate.setDate(currentDate.getDate() + 1);
   }
 

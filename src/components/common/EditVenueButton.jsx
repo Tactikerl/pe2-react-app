@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-const EditVenueButton = ({ venueId }) => {
+const EditVenueButton = ({ id }) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    navigate(`/venues/${venueId}/edit`);
+    navigate(`/venues/${id}/edit`);
   };
 
   return (

@@ -9,7 +9,7 @@ import Layout from "./components/common/Layout";
 import "../src/custom.scss";
 
 import "./App.css";
-import UserParams from "./components/common/UserParams";
+import UserParams from "./components/profile/UserParams";
 
 function App() {
   return (

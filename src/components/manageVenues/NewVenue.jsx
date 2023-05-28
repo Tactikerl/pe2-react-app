@@ -8,6 +8,7 @@ const NewVenue = ({ title }) => {
   const navigate = useNavigate();
   useEffect(() => {
     document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [venueData, setVenueData] = useState({

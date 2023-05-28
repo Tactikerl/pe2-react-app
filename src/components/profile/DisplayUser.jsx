@@ -1,6 +1,7 @@
 import { Tabs, Tab } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-import Avatar from "../utils/Avatar";
+import Avatar from "./Avatar";
 
 import profileFiller from "../../assets/img/profile-filler.jpg";
 import VenueManager from "./VenueManager";
@@ -84,7 +85,10 @@ const DisplayUser = (props) => {
               <div key={booking.id}>
                 <div className="card m-2 bg-alt">
                   <div className="card-body">
-                    <h3>{booking.venue.name}</h3>
+                    <Link to={`/venues/${booking.venue.id}`}>
+                      {" "}
+                      <h3>{booking.venue.name}</h3>
+                    </Link>
                     <p>
                       <b>Your Check Inn date</b> :{" "}
                       {formatDate(booking.dateFrom)}.

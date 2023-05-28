@@ -13,6 +13,7 @@ const UserParams = ({ title }) => {
 
   useEffect(() => {
     document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

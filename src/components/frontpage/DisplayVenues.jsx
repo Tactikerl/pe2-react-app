@@ -7,6 +7,7 @@ import Rating from "../common/Rating";
 import "../../../src/custom.scss";
 import Facilities from "../common/Facilities";
 import VenueAttributes from "../common/VenueAttributes";
+import Placeholder from "../../assets/img/placeholder.png";
 
 function DisplayVenues(props) {
   return (
@@ -15,7 +16,7 @@ function DisplayVenues(props) {
         <Row className="g-0">
           <Col lg={4} className="card-image">
             <img
-              src={props.image}
+              src={props.image || Placeholder}
               className="h-100 w-100 object-fit-cover img-fluid "
               alt="..."
             ></img>

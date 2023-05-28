@@ -5,10 +5,13 @@ import users from "../../assets/icons/users.svg";
 
 import { useEffect, useState } from "react";
 import { API_BOOKINGS_TRUE, API_PROFILES, API_HEADERS } from "../utils/url";
-import Facilities from "./Facilities";
+import Facilities from "../common/Facilities";
+import EditVenueButton from "../common/EditVenueButton";
+import DeleteVenue from "../common/DeleteVenue";
 
 const VenueManager = ({ user, token }) => {
   const [managerData, setManagerData] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [status, setStatus] = useState("loading");
   useEffect(() => {
     async function fetchManagerData() {
@@ -40,6 +43,7 @@ const VenueManager = ({ user, token }) => {
       }
     }
     fetchManagerData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function formatDate(date) {
@@ -62,7 +66,10 @@ const VenueManager = ({ user, token }) => {
                 <img src={users}></img> : {venue.maxGuests}
               </p>
               <Facilities meta={venue.meta} />
-
+              <div className="d-flex gap-2 mt-2 mb-2">
+                <EditVenueButton id={venue.id} />
+                <DeleteVenue id={venue.id} />
+              </div>
               {venue.bookings?.length > 0 && <h4>Bookings</h4>}
               <div className="card">
                 <ul className="list-group list-group-flush">

@@ -15,6 +15,7 @@ const VenueList = ({ title }) => {
   const [fetchVenues, setFetchVenues] = useState([]);
   const [venueSearch, setVenueSearch] = useState("");
 
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -23,6 +24,7 @@ const VenueList = ({ title }) => {
 
   useEffect(() => {
     document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -66,7 +68,7 @@ const VenueList = ({ title }) => {
 
   return (
     <div className="container justify-content-center">
-      <form className="row">
+      <form className="row mt-2">
         <div className="col-md-8 mb-2">
           <div className="input-group">
             <input
@@ -133,7 +135,7 @@ const VenueList = ({ title }) => {
             <DisplayVenues
               id={venue.id}
               key={venue.id + currentPage}
-              image={venue.media}
+              image={venue.media[0]}
               name={venue.name}
               owner={venue.owner}
               description={venue.description}

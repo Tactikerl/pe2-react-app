@@ -1,38 +1,22 @@
 import { useState, useEffect } from "react";
-import { API_LOGIN } from "../utils/url";
 import { Button } from "react-bootstrap";
-import { handlingServerError } from "../utils/API";
-
+import { loginUser } from "../utils/API";
 import "../../../src/custom.scss";
 
 const UserLogin = ({ title }) => {
-  const [email, setEmail] = useState("");
+  const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
     document.title = title;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const loginData = {
-      email: email,
-      password: password,
-    };
     try {
-      const res = await fetch(`${API_LOGIN}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginData),
-      });
-
-      if (res.status !== 200) {
-        await handlingServerError(res);
-      }
-      const json = await res.json();
+      const json = await loginUser(userEmail, password);
 
       const { name, email, accessToken, venueManager } = json;
 
@@ -49,18 +33,20 @@ const UserLogin = ({ title }) => {
   };
 
   return (
-    <div className="container-fluid justify-content-center row g-0">
+    <div className="row h-100">
       <form
         onSubmit={handleLogin}
         className="col-md-6 d-flex bg-main flex-column justify-content-center px-5"
       >
+        <h1>Login to Holidaze</h1>
         <label htmlFor="Email" className="form-label">
           Email:
           <input
             type="text"
-            value={email}
+            value={userEmail}
             onChange={(e) => setEmail(e.target.value)}
             className="form-control"
+            required
           />
         </label>
         <label htmlFor="Password" className="form-label">
@@ -70,6 +56,7 @@ const UserLogin = ({ title }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="form-control"
+            required
           />
         </label>
         <Button type="submit" variant="success" className="bg-green">

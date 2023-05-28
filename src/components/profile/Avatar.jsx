@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { handlingServerError } from "./API";
+import { handlingServerError } from "../utils/API";
+import { API_PROFILES } from "../utils/url";
 
 const Avatar = ({ avatar, name, updateCallback }) => {
   const [newAvatar, setNewAvatar] = useState("");
@@ -10,17 +11,14 @@ const Avatar = ({ avatar, name, updateCallback }) => {
     try {
       const token = sessionStorage.getItem("accessToken");
 
-      const res = await fetch(
-        `https://nf-api.onrender.com/api/v1/holidaze/profiles/${name}/media`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ avatar: newAvatar }),
-        }
-      );
+      const res = await fetch(`${API_PROFILES}${name}/media`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ avatar: newAvatar }),
+      });
 
       await handlingServerError(res);
       const json = await res.json();
