@@ -109,7 +109,7 @@ const ViewVenue = (props) => {
               <button
                 disabled={days === 0}
                 className="btn btn-primary mt-2 w-100"
-                onClick={props.CreateBooking}
+                onClick={props.createBooking}
               >
                 Book now
               </button>
