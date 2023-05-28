@@ -42,7 +42,7 @@ The Product Owner has requested links to the following:
 
     [A Gantt chart for project timing](https://github.com/users/Tactikerl/projects/3/views/1)
     [A design prototype] (https://www.figma.com/file/EGQKKf8YpZcJCBwlSz7ubL/pe2-design-prototype-and-style-guide?type=design&node-id=0%3A1&t=MsQsYazs260mRuHz-1)
-    [A style guide]()
+    [A style guide](https://www.figma.com/file/EGQKKf8YpZcJCBwlSz7ubL/pe2-design-prototype-and-style-guide?type=design&node-id=0%3A1&t=ixMcElK0XYeHkgu7-1)
     [A kanban project board](https://github.com/users/Tactikerl/projects/3/views/2)
     [A repository link](https://github.com/Tactikerl/pe2-react-app.git)
     [A hosted application demo link](https://pe2-kmk-holidaze.netlify.app/)
