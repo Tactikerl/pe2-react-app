@@ -20,7 +20,7 @@ function DisplayVenues(props) {
               alt="..."
             ></img>
           </Col>
-          <Col lg={8} className="bg-info-subtle">
+          <Col lg={8} className="bg-blue">
             <Card.Body>
               <div className="d-flex justify-content-between align-items-start">
                 <h1 className="fs-2">{props.name}</h1>
@@ -28,7 +28,7 @@ function DisplayVenues(props) {
               </div>
 
               <Row className="g-0">
-                <Col lg={9} className="bg-info-subtle ">
+                <Col lg={9} className="bg-blue">
                   <div style={{ fontSize: "14px" }}>
                     <VenueAttributes
                       owner={props.owner}
@@ -46,10 +46,7 @@ function DisplayVenues(props) {
                     {props.description}
                   </Card.Text>
                 </Col>
-                <Col
-                  lg={3}
-                  className="bg-info-subtle d-flex justify-content-end"
-                >
+                <Col lg={3} className="bg-blue d-flex justify-content-end">
                   <Facilities meta={props.meta} column={true} />
                 </Col>
               </Row>

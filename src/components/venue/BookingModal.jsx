@@ -24,7 +24,11 @@ function BookingModal(props) {
           {props.dates.endDate?.toLocaleDateString("en-US", dateOptions)}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleGoToFront}>
+          <Button
+            variant="secondary"
+            className="bg-blue text-dark"
+            onClick={props.handleGoToFront}
+          >
             Look at venues
           </Button>
           <Button variant="primary" onClick={props.handleReload}>

@@ -9,7 +9,7 @@ const UserLogout = () => {
 
   return (
     <div>
-      <Button variant="danger" onClick={handleStorageClear}>
+      <Button variant="danger" className="bg-red" onClick={handleStorageClear}>
         Logout
       </Button>
     </div>

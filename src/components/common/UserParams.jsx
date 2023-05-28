@@ -6,10 +6,14 @@ const user = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("accessToken");
 const isManager = sessionStorage.getItem("isManager");
 
-const UserParams = () => {
+const UserParams = ({ title }) => {
   const [userData, setUserData] = useState({});
   const [status, setStatus] = useState("loading");
   const [newAvatar, setNewAvatar] = useState("");
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -46,36 +50,9 @@ const UserParams = () => {
     fetchUserData();
   }, []);
 
-  const handleAvatarChange = async (e) => {
-    e.preventDefault();
-
-    try {
-      const updateUserData = { ...userData, avatar: newAvatar };
-      setUserData(updateUserData);
-      setNewAvatar("");
-
-      const token = sessionStorage.getItem("accessToken");
-
-      const res = await fetch(
-        `https://nf-api.onrender.com/api/v1/holidaze/profiles/${userData.name}/media`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ avatar: newAvatar }),
-        }
-      );
-
-      if (!res.ok) {
-        throw Error(`HTTP error! status: ${res.status}`);
-      }
-
-      console.log("Avatar update successful!");
-    } catch (error) {
-      console.error("Error updating avatar:", error);
-    }
+  const handleAvatarChange = (newAvatar) => {
+    const updateUserData = { ...userData, avatar: newAvatar };
+    setUserData(updateUserData);
   };
 
   if (!user) {

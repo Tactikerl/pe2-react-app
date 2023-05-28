@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { API_LOGIN } from "../utils/url";
 import { Button } from "react-bootstrap";
+import { handlingServerError } from "../utils/API";
 
 import "../../../src/custom.scss";
 
-const UserLogin = () => {
+const UserLogin = ({ title }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -25,10 +30,9 @@ const UserLogin = () => {
       });
 
       if (res.status !== 200) {
-        throw new Error(`HTTP Error!  status: ${res.status}`);
+        await handlingServerError(res);
       }
       const json = await res.json();
-      console.log(json);
 
       const { name, email, accessToken, venueManager } = json;
 
@@ -38,18 +42,17 @@ const UserLogin = () => {
       sessionStorage.setItem("isManager", venueManager);
 
       console.log("User successfully logged inn!");
+      window.location.href = "/";
     } catch (error) {
       console.error("Error logging inn:", error);
-      console.log("Response object:", error.response);
     }
-    window.location.href = "/";
   };
 
   return (
     <div className="container-fluid justify-content-center row g-0">
       <form
         onSubmit={handleLogin}
-        className="col-md-6 d-flex bg-info-subtle flex-column justify-content-center px-5"
+        className="col-md-6 d-flex bg-main flex-column justify-content-center px-5"
       >
         <label htmlFor="Email" className="form-label">
           Email:
@@ -69,7 +72,7 @@ const UserLogin = () => {
             className="form-control"
           />
         </label>
-        <Button type="submit" variant="success">
+        <Button type="submit" variant="success" className="bg-green">
           Login
         </Button>
       </form>

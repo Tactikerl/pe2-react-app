@@ -40,7 +40,7 @@ const ViewVenue = (props) => {
         <div className="col-lg-7">
           <Facilities meta={props.meta} />
           <p className="mt-2 fs-5">{props.description}</p>
-          <div className="card bg-warning-subtle">
+          <div className="card bg-yellow">
             <div className="card-body">
               <VenueAttributes
                 owner={props.owner}
@@ -67,7 +67,7 @@ const ViewVenue = (props) => {
             </label>
             <div className="input-group">
               <button
-                className="btn btn-primary "
+                className="btn bg-main"
                 onClick={() =>
                   props.guests > 1 &&
                   props.handleGuestNumberChange(props.guests - 1)
@@ -86,7 +86,7 @@ const ViewVenue = (props) => {
                 onChange={props.handleGuestNumberChange}
               />
               <button
-                className="btn btn-primary"
+                className="btn bg-main"
                 onClick={() => props.handleGuestNumberChange(props.guests + 1)}
               >
                 <img src={userPlus} alt="" />

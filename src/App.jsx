@@ -16,13 +16,28 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/venues/:id" element={<Venue />} />
-          <Route path="" element={<VenueList />} />
-          <Route path="/UserRegister" element={<UserRegister />} />
-          <Route path="/NewVenue" element={<NewVenue />} />
-          <Route path="/UserLogin" element={<UserLogin />} />
-          <Route path="/venues/:id/edit" element={<EditVenue />} />
-          <Route path="/profiles/:name" element={<UserParams />} />
+          <Route path="/venues/:id" element={<Venue title="Venue" />} />
+          <Route path="" element={<VenueList title="Welcome to Holidaze!" />} />
+          <Route
+            path="/UserRegister"
+            element={<UserRegister title="Register a new user!" />}
+          />
+          <Route
+            path="/NewVenue"
+            element={<NewVenue title="Create a new venue!" />}
+          />
+          <Route
+            path="/UserLogin"
+            element={<UserLogin title="Log in to Holidaze!" />}
+          />
+          <Route
+            path="/venues/:id/edit"
+            element={<EditVenue title="Edit your Holidaze venue!" />}
+          />
+          <Route
+            path="/profiles/:name"
+            element={<UserParams title="Your profile overview." />}
+          />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Layout>

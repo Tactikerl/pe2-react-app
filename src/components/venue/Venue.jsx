@@ -18,7 +18,7 @@ var tomorrow = new Date();
 tomorrow.setHours(0, 0, 0, 0);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
-const Venue = () => {
+const Venue = ({ title }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const { id } = useParams();
@@ -31,14 +31,12 @@ const Venue = () => {
     },
   ]);
   const [disabledDates, setDisabledDates] = useState([]);
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: null,
-      key: "selection",
-    },
-  ]);
+
   const [guests, setGuests] = useState(1);
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   useEffect(() => {
     requestVenue(id);
@@ -125,7 +123,7 @@ const Venue = () => {
 
     fetch(`${API_ALL_BOOKINGS}`, requestOptions)
       .then((response) => response.text())
-      .then((result) => {
+      .then(() => {
         setShow(true);
       })
       .catch((error) => console.log("error", error));
@@ -170,7 +168,7 @@ const Venue = () => {
       {venue.owner &&
         venue.owner.name &&
         sessionStorage.getItem("username") === venue.owner.name && (
-          <div className="row  bg-danger-subtle g-0">
+          <div className="row  bg-alt g-0">
             <div className="col d-flex gap-3 m-2 justify-content-center">
               {/* add modal for delete button to confirm deletion */}
               <DeleteVenue id={venue.id} />

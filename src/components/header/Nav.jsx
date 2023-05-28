@@ -1,18 +1,23 @@
 import UserLogout from "./UserLogout";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import menu from "../../assets/icons/menu.svg";
 
 const Navbar = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
   return (
     <Nav>
-      <NavDropdown title="Menu" id="nav-dropdown">
-        <NavDropdown.Item href="/">Home</NavDropdown.Item>
+      <NavDropdown title={<img src={menu} />} id="nav-dropdown">
+        <NavDropdown.Item className="desc-text" href="/">
+          Home
+        </NavDropdown.Item>
         <NavDropdown.Divider />
         {isLoggedIn ? (
           <>
-            <NavDropdown.Item href="/profiles/:name">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="/NewVenue">
+            <NavDropdown.Item className="desc-text" href="/profiles/:name">
+              Profile
+            </NavDropdown.Item>
+            <NavDropdown.Item className="desc-text" href="/NewVenue">
               Create New Venue
             </NavDropdown.Item>
             <NavDropdown.Item>
@@ -21,8 +26,12 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <NavDropdown.Item href="/UserLogin">Login</NavDropdown.Item>
-            <NavDropdown.Item href="/UserRegister">Register</NavDropdown.Item>
+            <NavDropdown.Item className="desc-text" href="/UserLogin">
+              Login
+            </NavDropdown.Item>
+            <NavDropdown.Item className="desc-text" href="/UserRegister">
+              Register
+            </NavDropdown.Item>
           </>
         )}
       </NavDropdown>

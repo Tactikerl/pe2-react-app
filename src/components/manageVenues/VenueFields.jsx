@@ -175,7 +175,7 @@ const VenueFields = ({ venueData, setVenueData, handleVenueImages }) => {
               <input type="url" ref={imageElement} className="form-control" />
               <button
                 type="button"
-                className="btn btn-primary"
+                className="btn bg-blue"
                 onClick={() => handleVenueImages(imageElement.current.value)}
               >
                 Add
@@ -210,7 +210,7 @@ const VenueFields = ({ venueData, setVenueData, handleVenueImages }) => {
                 type="checkbox"
                 className="form-check-input"
                 checked={venueData.meta.parking}
-                onChange={(e) =>
+                onChange={() =>
                   setVenueData({
                     ...venueData,
                     meta: {
@@ -228,7 +228,7 @@ const VenueFields = ({ venueData, setVenueData, handleVenueImages }) => {
               <input
                 type="checkbox"
                 checked={venueData.meta.breakfast}
-                onChange={(e) =>
+                onChange={() =>
                   setVenueData({
                     ...venueData,
                     meta: {
@@ -247,7 +247,7 @@ const VenueFields = ({ venueData, setVenueData, handleVenueImages }) => {
               <input
                 type="checkbox"
                 checked={venueData.meta.pets}
-                onChange={(e) =>
+                onChange={() =>
                   setVenueData({
                     ...venueData,
                     meta: { ...venueData.meta, pets: !venueData.meta.pets },

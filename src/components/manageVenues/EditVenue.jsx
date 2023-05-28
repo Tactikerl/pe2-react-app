@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_FETCH_VENUE } from "../utils/url";
 import VenueFields from "./VenueFields";
+import { handlingServerError } from "../utils/API";
 
-const EditVenue = () => {
+const EditVenue = ({ title }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -28,6 +29,10 @@ const EditVenue = () => {
       lng: 0,
     },
   });
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   useEffect(() => {
     fetchVenueData(id);
@@ -62,10 +67,7 @@ const EditVenue = () => {
 
     try {
       const res = await fetch(`${API_FETCH_VENUE}${id}`, requestOptions);
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-
+      await handlingServerError(res);
       console.log("Venue update successful!");
 
       navigate(`/venues/${id}`);
@@ -84,7 +86,7 @@ const EditVenue = () => {
   };
 
   return (
-    <div className="container-fluid justify-content-center bg-danger-subtle rounded">
+    <div className="container-fluid justify-content-center bg-alt rounded">
       <h1>Edit venue</h1>
       <form onSubmit={handleSubmit} className="row">
         <VenueFields
@@ -93,7 +95,7 @@ const EditVenue = () => {
           handleVenueImages={handleVenueImages}
         />
         <div className="col-md-6 mb-3">
-          <button className="btn btn-primary" type="submit">
+          <button className="btn bg-blue" type="submit">
             Update Venue
           </button>
         </div>

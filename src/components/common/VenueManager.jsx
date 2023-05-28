@@ -1,21 +1,11 @@
 import { Link } from "react-router-dom";
-import Badge from "react-bootstrap/Badge";
+
 import dollar from "../../assets/icons/dollar-sign.svg";
 import users from "../../assets/icons/users.svg";
-import breakfast from "../../assets/icons/breakfast.svg";
-import pets from "../../assets/icons/pawprint.png";
-import parking from "../../assets/icons/parking.svg";
-import wifi from "../../assets/icons/wifi.svg";
+
 import { useEffect, useState } from "react";
 import { API_BOOKINGS_TRUE, API_PROFILES, API_HEADERS } from "../utils/url";
 import Facilities from "./Facilities";
-
-const icons = {
-  breakfast,
-  pets,
-  parking,
-  wifi,
-};
 
 const VenueManager = ({ user, token }) => {
   const [managerData, setManagerData] = useState([]);
@@ -60,7 +50,7 @@ const VenueManager = ({ user, token }) => {
     <>
       {managerData?.map((venue) => (
         <div key={venue.id}>
-          <div className="card m-2 bg-danger-subtle">
+          <div className="card m-2 bg-alt">
             <div className="card-body">
               <Link to={`/venues/${venue.id}`}>
                 <h3>{venue.name}</h3>
@@ -72,18 +62,7 @@ const VenueManager = ({ user, token }) => {
                 <img src={users}></img> : {venue.maxGuests}
               </p>
               <Facilities meta={venue.meta} />
-              {/* {Object.keys(venue?.meta || {}).map((key) =>
-                venue.meta[key] ? (
-                  <Badge
-                    bg="info"
-                    className="fs-3 text-bg-info me-2 mb-2"
-                    key={key}
-                  >
-                    {key.charAt(0).toUpperCase() + key.slice(1)}{" "}
-                    {<img height={25} width={25} src={icons[key]}></img>}
-                  </Badge>
-                ) : null
-              )} */}
+
               {venue.bookings?.length > 0 && <h4>Bookings</h4>}
               <div className="card">
                 <ul className="list-group list-group-flush">

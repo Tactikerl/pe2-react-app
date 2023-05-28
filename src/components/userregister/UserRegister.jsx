@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { handlingServerError } from "../utils/API";
 
-const UserRegister = () => {
+const UserRegister = ({ title }) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +32,7 @@ const UserRegister = () => {
         }
       );
 
-      if (!res.ok) {
-        throw Error(`HTTP error! status: ${res.status}`);
-      }
+      await handlingServerError(res);
 
       console.log("User registered successfully!");
     } catch (error) {
@@ -41,7 +44,7 @@ const UserRegister = () => {
     <div className="container-fluid justify-content-center row">
       <form
         onSubmit={handleSubmit}
-        className="col-md-6 d-flex bg-info-subtle flex-column justify-content-center"
+        className="col-md-6 d-flex bg-main flex-column justify-content-center"
       >
         <h3>User Register</h3>
         <label htmlFor="userName" className="form-label">
@@ -86,7 +89,7 @@ const UserRegister = () => {
             Check box if Venue Admin
           </label>
         </div>
-        <button type="submit" className="btn bg-warning-subtle">
+        <button type="submit" className="btn bg-green border-dark">
           Register
         </button>
       </form>

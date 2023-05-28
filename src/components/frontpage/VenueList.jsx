@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import DisplayVenues from "./DisplayVenues";
-import { API_VENUES_PGN, API_VENUES_SRT } from "../utils/url";
+import { API_VENUES_SRT } from "../utils/url";
 import { Button } from "react-bootstrap";
 import "../../../src/custom.scss";
 
@@ -11,7 +11,7 @@ const sorting = [
   { sort: "rating", order: "desc", label: "Rating" },
 ];
 
-const VenueList = () => {
+const VenueList = ({ title }) => {
   const [fetchVenues, setFetchVenues] = useState([]);
   const [venueSearch, setVenueSearch] = useState("");
 
@@ -20,6 +20,10 @@ const VenueList = () => {
 
   const [currentPage, setCurrentPage] = useState(0);
   const [sortParam, setSortParam] = useState(sorting[0]);
+
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   useEffect(() => {
     async function requestFetchVenues() {
@@ -76,7 +80,11 @@ const VenueList = () => {
               className="form-control"
               aria-label="Search for venues"
             />
-            <Button type="button" variant="secondary">
+            <Button
+              type="button"
+              variant="secondary"
+              className="bg-blue text-dark"
+            >
               Search
             </Button>
           </div>

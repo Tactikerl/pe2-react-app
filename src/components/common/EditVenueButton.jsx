@@ -9,7 +9,7 @@ const EditVenueButton = ({ venueId }) => {
 
   return (
     <div>
-      <button className="btn btn-warning " onClick={handleEdit}>
+      <button className="btn bg-yellow" onClick={handleEdit}>
         Edit Your Venue
       </button>
     </div>

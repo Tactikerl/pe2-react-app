@@ -1,16 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { API_FETCH_VENUE } from "../utils/url";
 
-const DeleteVenue = ({ id, venueOwner }) => {
+const DeleteVenue = ({ id }) => {
   const [isDeleted, setIsDeleted] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const user = sessionStorage.getItem("username");
-    setUserName(user);
-  }, []);
+  const [error, setError] = useState(null);
 
   const handleDelete = async () => {
     try {
@@ -30,7 +25,9 @@ const DeleteVenue = ({ id, venueOwner }) => {
       }
 
       setIsDeleted(true);
-      console.log("Venue deleted successfully");
+
+      alert("Venue deleted successfully");
+      window.location.href = "/";
     } catch (error) {
       setError("An error occurred while deleting the venue.");
       console.error("Error deleting venue:", error);
@@ -44,7 +41,7 @@ const DeleteVenue = ({ id, venueOwner }) => {
   return (
     <div>
       {error && <p>Error: {error}</p>}
-      <Button variant="danger" onClick={handleDelete}>
+      <Button variant="danger" className="bg-red" onClick={handleDelete}>
         Delete Your Venue
       </Button>
     </div>

@@ -1,5 +1,6 @@
-import { Tabs, Tab, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Tabs, Tab } from "react-bootstrap";
+
+import Avatar from "../utils/Avatar";
 
 import profileFiller from "../../assets/img/profile-filler.jpg";
 import VenueManager from "./VenueManager";
@@ -23,7 +24,7 @@ const DisplayUser = (props) => {
   }
 
   return (
-    <div className="bg-info-subtle" style={{ minHeight: "100%" }}>
+    <div className="bg-blue" style={{ minHeight: "100%" }}>
       <Tabs
         defaultActiveKey="profile"
         id="user-tabs"
@@ -37,35 +38,17 @@ const DisplayUser = (props) => {
               <div className="col-md-6">
                 <div>
                   <h1>{user.name}</h1>
-                  <img
-                    src={user.avatar}
-                    alt={`Profile avatar for ${user.name}`}
-                    className="rounded bg-white p-3"
-                    width={250}
+
+                  <Avatar
+                    avatar={user.avatar}
+                    name={user.name}
+                    updateCallback={props.handleAvatarChange}
                   />
-                  <form
-                    className="mb-2 mt-2"
-                    onSubmit={props.handleAvatarChange}
-                  >
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        value={props.newAvatar}
-                        className="form-control"
-                        onChange={(e) => props.setNewAvatar(e.target.value)}
-                        placeholder="New Avatar URL"
-                        required
-                      />
-                      <button className="btn btn-primary" type="submit">
-                        Change Avatar
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
               <div className="col-md-6">
                 <div className="card">
-                  <div className="card-body bg-warning-subtle">
+                  <div className="card-body bg-yellow">
                     <p>
                       <b>Email</b> : {user.email}
                     </p>
@@ -99,7 +82,7 @@ const DisplayUser = (props) => {
           <>
             {userBookings.map((booking) => (
               <div key={booking.id}>
-                <div className="card m-2 bg-success-subtle">
+                <div className="card m-2 bg-alt">
                   <div className="card-body">
                     <h3>{booking.venue.name}</h3>
                     <p>

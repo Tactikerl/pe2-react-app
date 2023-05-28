@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_CREATE } from "../utils/url";
 import VenueFields from "./VenueFields";
+import { handlingServerError } from "../utils/API";
 
-const NewVenue = () => {
+const NewVenue = ({ title }) => {
   const navigate = useNavigate();
+  useEffect(() => {
+    document.title = title;
+  }, []);
 
   const [venueData, setVenueData] = useState({
     name: "",
@@ -53,9 +57,7 @@ const NewVenue = () => {
       });
       console.log(venueData);
 
-      if (!res.ok) {
-        throw Error(`HTTP error! status: ${res.status}`);
-      }
+      await handlingServerError(res);
 
       console.log("Venue creation successfull!");
 
@@ -67,7 +69,7 @@ const NewVenue = () => {
   };
 
   return (
-    <div className="container-fluid rounded justify-content-center bg-danger-subtle rounded">
+    <div className="container-fluid rounded justify-content-center bg-alt rounded">
       <form onSubmit={handleSubmit} className="row">
         <h1>Create a new Venue</h1>
         <VenueFields
@@ -77,7 +79,7 @@ const NewVenue = () => {
         />
 
         <div className="col-md-6 mb-3">
-          <button className="btn btn-primary" type="submit">
+          <button className="btn bg-blue" type="submit">
             Create Venue
           </button>
         </div>

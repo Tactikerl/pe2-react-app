@@ -1,20 +1,17 @@
 import { useState } from "react";
+import { handlingServerError } from "./API";
 
-const AvatarChange = () => {
+const Avatar = ({ avatar, name, updateCallback }) => {
   const [newAvatar, setNewAvatar] = useState("");
-  const [userData, setUserData] = useState({});
+
   const handleAvatarChange = async (e) => {
     e.preventDefault();
 
     try {
-      const updateUserData = { ...userData, avatar: newAvatar };
-      setUserData(updateUserData);
-      setNewAvatar("");
-
       const token = sessionStorage.getItem("accessToken");
 
       const res = await fetch(
-        `https://nf-api.onrender.com/api/v1/holidaze/profiles/${userData.name}/media`,
+        `https://nf-api.onrender.com/api/v1/holidaze/profiles/${name}/media`,
         {
           method: "PUT",
           headers: {
@@ -25,9 +22,10 @@ const AvatarChange = () => {
         }
       );
 
-      if (!res.ok) {
-        throw Error(`HTTP error! status: ${res.status}`);
-      }
+      await handlingServerError(res);
+      const json = await res.json();
+      setNewAvatar(json.avatar);
+      updateCallback(newAvatar);
 
       console.log("Avatar update successful!");
     } catch (error) {
@@ -37,22 +35,31 @@ const AvatarChange = () => {
 
   return (
     <div>
-      <h1>{userData.name}</h1>
-      <img src={userData.avatar} alt={`Profile avatar for ${userData.name}`} />
+      <img
+        src={avatar}
+        alt={`Profile avatar for ${name}`}
+        className="rounded bg-white p-3"
+        width={250}
+      />
 
       {/* Avatar change form */}
-      <form onSubmit={handleAvatarChange}>
-        <input
-          type="text"
-          value={newAvatar}
-          onChange={(e) => setNewAvatar(e.target.value)}
-          placeholder="New Avatar URL"
-          required
-        />
-        <button type="submit">Change Avatar</button>
+      <form onSubmit={handleAvatarChange} className="mb-2 mt-2">
+        <div className="input-group">
+          <input
+            type="url"
+            value={newAvatar}
+            className="form-control"
+            onChange={(e) => setNewAvatar(e.target.value)}
+            placeholder="New Avatar URL"
+            required
+          />
+          <button className="btn bg-main border-dark" type="submit">
+            Change Avatar
+          </button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default AvatarChange;
+export default Avatar;

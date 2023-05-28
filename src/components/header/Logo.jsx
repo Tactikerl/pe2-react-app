@@ -4,7 +4,7 @@ const Logo = () => {
     <div className="logo">
       <Link className="text-decoration-none" to={"/"}>
         {" "}
-        <h1>Holidaze</h1>
+        <h1 className="logo-text">Holidaze</h1>
       </Link>
     </div>
   );
