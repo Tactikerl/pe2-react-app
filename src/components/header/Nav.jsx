@@ -5,7 +5,7 @@ import menu from "../../assets/icons/menu.svg";
 
 const Navbar = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
-  const isManager = sessionStorage.getItem("isManager");
+  const isManager = sessionStorage.getItem("isManager") === "true";
   return (
     <Nav>
       <NavDropdown title={<img src={menu} />} id="nav-dropdown">

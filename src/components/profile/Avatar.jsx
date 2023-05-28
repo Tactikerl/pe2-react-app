@@ -40,11 +40,11 @@ const Avatar = ({ avatar, name, updateCallback }) => {
         width={250}
       />
 
-      {/* Avatar change form */}
       <form onSubmit={handleAvatarChange} className="mb-2 mt-2">
         <div className="input-group">
           <input
             type="url"
+            id="avatar"
             value={newAvatar}
             className="form-control"
             onChange={(e) => setNewAvatar(e.target.value)}
