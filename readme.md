@@ -1,5 +1,3 @@
-node version v16.17.0
-
 <h1 align="center">ProjectExam2_PE2_Karl-Kvammen_Readme</h1>
 
 <p align="center">This is my Project Exam for the fourth and last semester of FED(Front-end Development) at  Noroff. The exam took 7 weeks and i have tried to create a accommodation booking site following User Stories provided in the exam brief we received</p>
@@ -88,10 +86,10 @@ Planning Applications
 
 ### Prerequisites
 
-- npm@16.17.0
+- node version v16.17.0 (not required, but recommended)
 
 ```sh
-npm install npm@16.17.0 -g
+npm install npm@latest -g
 ```
 
 - LiveServer Extension (VSCode) or similar.

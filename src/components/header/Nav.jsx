@@ -5,6 +5,7 @@ import menu from "../../assets/icons/menu.svg";
 
 const Navbar = () => {
   const isLoggedIn = !!sessionStorage.getItem("accessToken");
+  const isManager = sessionStorage.getItem("isManager");
   return (
     <Nav>
       <NavDropdown title={<img src={menu} />} id="nav-dropdown">
@@ -17,9 +18,13 @@ const Navbar = () => {
             <NavDropdown.Item className="desc-text" href="/profiles/:name">
               Profile
             </NavDropdown.Item>
-            <NavDropdown.Item className="desc-text" href="/NewVenue">
-              Create New Venue
-            </NavDropdown.Item>
+            {isManager && (
+              <>
+                <NavDropdown.Item className="desc-text" href="/NewVenue">
+                  Create New Venue
+                </NavDropdown.Item>
+              </>
+            )}
             <NavDropdown.Item>
               <UserLogout />
             </NavDropdown.Item>
