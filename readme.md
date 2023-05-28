@@ -88,10 +88,6 @@ Planning Applications
 
 - node version v16.17.0 (not required, but recommended)
 
-```sh
-npm install npm@latest -g
-```
-
 - LiveServer Extension (VSCode) or similar.
 
 ### Installation
@@ -114,8 +110,8 @@ npm install
 npm run dev
 ```
 
-4.
-
 ## Usage
 
 To test and use the website the project should be running locally and you can now register a test user via the "Register" page using a <b>@stud.noroff.no</b> or <b>@noroff.no</b> email address, and a password containing at least 8 characters.
+
+User can now, depending on which type of user they have created, create, edit and delete venues and create bookings at other venues made by other users.
