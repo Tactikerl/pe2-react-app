@@ -26,6 +26,7 @@ const UserRegister = ({ title }) => {
       name: userName,
       email: email,
       password: password,
+      venueManager: isAdmin,
     };
 
     try {
