@@ -2,9 +2,11 @@ import UserLogout from "./UserLogout";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import menu from "../../assets/icons/menu.svg";
+import { useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 
 const Navbar = () => {
-  const isLoggedIn = !!sessionStorage.getItem("accessToken");
+  const { user } = useContext(UserContext);
   return (
     <Nav>
       <NavDropdown title={<img src={menu} />} id="nav-dropdown">
@@ -12,7 +14,7 @@ const Navbar = () => {
           Home
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        {isLoggedIn ? (
+        {user.accessToken ? (
           <>
             <NavDropdown.Item className="desc-text" href="/profiles/:name">
               Profile

@@ -8,4 +8,5 @@ export const UserContext = createContext({
     isManager: false,
   },
   updateUser: () => {},
+  clearUser: () => {},
 });

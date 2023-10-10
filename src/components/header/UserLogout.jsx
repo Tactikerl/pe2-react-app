@@ -1,9 +1,12 @@
 import "../../../src/custom.scss";
 import { Button } from "react-bootstrap";
+import { useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 
 const UserLogout = () => {
+  const { clearUser } = useContext(UserContext);
   const handleStorageClear = () => {
-    sessionStorage.clear();
+    clearUser();
     window.location.href = "/";
   };
 

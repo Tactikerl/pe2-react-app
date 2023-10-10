@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import { API_FETCH_VENUE } from "../utils/url";
+import { UserContext } from "../utils/UserContext";
 
 const DeleteVenue = ({ id }) => {
   const [isDeleted, setIsDeleted] = useState(false);
+  const { user } = useContext(UserContext);
 
   const [error, setError] = useState(null);
 
   const handleDelete = async () => {
     try {
-      const token = sessionStorage.getItem("accessToken");
+      const token = user.accessToken;
 
       const requestOptions = {
         method: "DELETE",

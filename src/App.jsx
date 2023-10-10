@@ -28,9 +28,13 @@ function App() {
     sessionStorage.setItem("isManager", newUser.venueManager);
     setUser(newUser);
   }
+  function clearUser() {
+    sessionStorage.clear();
+    setUser({});
+  }
   return (
     <BrowserRouter>
-      <UserContext.Provider value={{ user, updateUser }}>
+      <UserContext.Provider value={{ user, updateUser, clearUser }}>
         <Layout>
           <Routes>
             <Route path="/venues/:id" element={<Venue title="Venue" />} />
