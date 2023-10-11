@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { handlingServerError } from "../utils/API";
 import { API_PROFILES } from "../utils/url";
+import { UserContext } from "../utils/UserContext";
 
 const Avatar = ({ avatar, name, updateCallback }) => {
   const [newAvatar, setNewAvatar] = useState("");
+  const { user } = useContext(UserContext);
 
   const handleAvatarChange = async (e) => {
     e.preventDefault();
 
     try {
-      const token = sessionStorage.getItem("accessToken");
+      const token = user.accessToken;
 
       const res = await fetch(`${API_PROFILES}${name}/media`, {
         method: "PUT",

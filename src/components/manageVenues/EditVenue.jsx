@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API_FETCH_VENUE } from "../utils/url";
 import VenueFields from "./VenueFields";
 import { handlingServerError } from "../utils/API";
+import { UserContext } from "../utils/UserContext";
 
 const EditVenue = ({ title }) => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { user } = useContext(UserContext);
 
   const [venueData, setVenueData] = useState({
     name: "",
@@ -55,7 +57,7 @@ const EditVenue = ({ title }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = sessionStorage.getItem("accessToken");
+    const token = user.accessToken;
 
     const requestOptions = {
       method: "PUT",

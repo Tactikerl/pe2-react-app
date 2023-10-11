@@ -1,9 +1,3 @@
-const token = sessionStorage.getItem("accessToken");
-
-export const API_HEADERS = {
-  Authorization: `Bearer ${token}`,
-};
-
 export const API_USER_ENDPOINT = `https://nf-api.onrender.com/api/v1/holidaze/profiles/`;
 
 export const API_MANAGER_ENDPOINT = `?_bookings=true&_venues=true`;

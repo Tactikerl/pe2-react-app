@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_CREATE } from "../utils/url";
 import VenueFields from "./VenueFields";
 import { handlingServerError } from "../utils/API";
+import { UserContext } from "../utils/UserContext";
 
 const NewVenue = ({ title }) => {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     document.title = title;
@@ -45,7 +47,7 @@ const NewVenue = ({ title }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = sessionStorage.getItem("accessToken");
+    const token = user.accessToken;
 
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");

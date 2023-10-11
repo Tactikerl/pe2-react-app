@@ -1,8 +1,8 @@
 import { Tabs, Tab } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useContext } from "react";
+import { UserContext } from "../utils/UserContext";
 import Avatar from "./Avatar";
-
 import profileFiller from "../../assets/img/profile-filler.jpg";
 import VenueManager from "./VenueManager";
 
@@ -14,10 +14,11 @@ const dateOptions = {
   hour: "2-digit",
   minute: "2-digit",
 };
-const token = sessionStorage.getItem("accessToken");
 
 const DisplayUser = (props) => {
-  const { user, userBookings, userVenues, showVenuesLink } = props;
+  const { user } = useContext(UserContext);
+  const token = user.accessToken;
+  const { userData, userBookings, userVenues, showVenuesLink } = props;
 
   function formatDate(datestring) {
     const date = new Date(datestring);
@@ -38,11 +39,11 @@ const DisplayUser = (props) => {
             <div className="row pe-2 ps-2">
               <div className="col-md-6">
                 <div>
-                  <h1>{user.name}</h1>
+                  <h1>{userData.name}</h1>
 
                   <Avatar
-                    avatar={user.avatar}
-                    name={user.name}
+                    avatar={userData.avatar}
+                    name={userData.name}
                     updateCallback={props.handleAvatarChange}
                   />
                 </div>
@@ -51,20 +52,20 @@ const DisplayUser = (props) => {
                 <div className="card">
                   <div className="card-body bg-yellow">
                     <p>
-                      <b>Email</b> : {user.email}
+                      <b>Email</b> : {userData.email}
                     </p>
                     <p>
-                      <b>Your bookings</b> : {user._count?.bookings}
+                      <b>Your bookings</b> : {userData._count?.bookings}
                     </p>
                     <p>
-                      {user.venueManager ? (
+                      {userData.venueManager ? (
                         <b>{"Manager"}</b>
                       ) : (
                         <b>{"Customer"}</b>
                       )}
                     </p>
                     <p>
-                      <b>Owned venues</b> : {user._count?.venues}
+                      <b>Owned venues</b> : {userData._count?.venues}
                     </p>
                   </div>
                 </div>
@@ -108,7 +109,7 @@ const DisplayUser = (props) => {
         {showVenuesLink && (
           <Tab eventKey="venues" title="Your Venues">
             <VenueManager
-              user={user.name}
+              user={userData.name}
               userVenues={userVenues}
               token={token}
             />

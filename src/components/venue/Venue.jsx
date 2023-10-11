@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -13,6 +13,7 @@ import DeleteVenue from "../common/DeleteVenue";
 import EditVenueButton from "../common/EditVenueButton";
 import BookingModal from "./BookingModal";
 import { findAvailableDate, getDatesBetween } from "../utils/dateHandling";
+import { UserContext } from "../utils/UserContext";
 
 var tomorrow = new Date();
 tomorrow.setHours(0, 0, 0, 0);
@@ -23,6 +24,7 @@ const Venue = ({ title }) => {
   const [show, setShow] = useState(false);
   const { id } = useParams();
   const [venue, setVenue] = useState({ rating: 0 });
+  const { user } = useContext(UserContext);
   const [allBookings, setAllBookings] = useState([
     {
       startDate: new Date(),
@@ -101,7 +103,7 @@ const Venue = ({ title }) => {
   }
 
   async function CreateBooking() {
-    const token = sessionStorage.getItem("accessToken");
+    const token = user.accessToken;
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -158,22 +160,18 @@ const Venue = ({ title }) => {
         startDate={allBookings.at(-1).startDate}
         endDate={allBookings.at(-1).endDate}
         handleGuestNumberChange={handleGuestsChange}
-        userLoggedIn={
-          sessionStorage.getItem("accessToken") &&
-          sessionStorage.getItem("username") &&
-          sessionStorage.getItem("email")
-        }
+        userLoggedIn={user.accessToken && user.username && user.email}
         createBooking={CreateBooking}
       />
 
       {venue.owner &&
         venue.owner.name &&
-        sessionStorage.getItem("username") === venue.owner.name && (
+        user.username === venue.owner.name && (
           <div className="row  bg-alt g-0">
             <div className="col d-flex gap-3 m-2 justify-content-center">
               {/* add modal for delete button to confirm deletion */}
               <DeleteVenue id={venue.id} />
-              <EditVenueButton venueId={venue.id} />
+              <EditVenueButton id={venue.id} />
             </div>
           </div>
         )}

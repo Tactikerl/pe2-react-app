@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
-import user from "../../assets/icons/user.svg";
-import { API_HEADERS, API_PROFILES } from "../utils/url";
+import { useEffect, useState, useContext } from "react";
+import userIcon from "../../assets/icons/user.svg";
+import { API_PROFILES } from "../utils/url";
+import { UserContext } from "../utils/UserContext";
 
 const UserIcon = () => {
-  const [avatar, setAvatar] = useState(user);
+  const [avatar, setAvatar] = useState(userIcon);
+  const { user } = useContext(UserContext);
   useEffect(() => {
-    async function getAvatar(user) {
-      const res = await fetch(`${API_PROFILES}${user}`, {
+    async function getAvatar(username, token) {
+      const res = await fetch(`${API_PROFILES}${username}`, {
         method: "GET",
-        headers: API_HEADERS,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         redirect: "follow",
       });
 
@@ -18,9 +22,10 @@ const UserIcon = () => {
         setAvatar(json.avatar);
       }
     }
-    if (sessionStorage.getItem("accessToken")) {
-      const user = sessionStorage.getItem("username");
-      getAvatar(user);
+
+    if (user.accessToken) {
+      const username = user.username;
+      getAvatar(username, user.accessToken);
     }
   }, []);
 
