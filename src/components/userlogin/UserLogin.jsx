@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button } from "react-bootstrap";
 import { loginUser } from "../utils/API";
 import "../../../src/custom.scss";
+import { UserContext } from "../utils/UserContext";
 
 const UserLogin = ({ title }) => {
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { updateUser } = useContext(UserContext);
 
   useEffect(() => {
     document.title = title;
@@ -20,10 +22,7 @@ const UserLogin = ({ title }) => {
 
       const { name, email, accessToken, venueManager } = json;
 
-      sessionStorage.setItem("username", name);
-      sessionStorage.setItem("email", email);
-      sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("isManager", venueManager);
+      updateUser({ username: name, email, accessToken, venueManager });
 
       console.log("User successfully logged inn!");
       window.location.href = "/";

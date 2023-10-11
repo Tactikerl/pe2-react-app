@@ -1,15 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import DisplayUser from "./DisplayUser";
-import { API_MANAGER_ENDPOINT, API_PROFILES, API_HEADERS } from "../utils/url";
-
-const user = sessionStorage.getItem("username");
-const token = sessionStorage.getItem("accessToken");
-const isManager = sessionStorage.getItem("isManager");
+import { API_MANAGER_ENDPOINT, API_PROFILES } from "../utils/url";
+import { UserContext } from "../utils/UserContext";
 
 const UserParams = ({ title }) => {
+  const { user } = useContext(UserContext);
   const [userData, setUserData] = useState({});
   const [status, setStatus] = useState("loading");
   const [newAvatar, setNewAvatar] = useState("");
+
+  const userName = user.username;
+  const token = user.accessToken;
+  const isManager = user.isManager;
 
   useEffect(() => {
     document.title = title;
@@ -25,10 +27,12 @@ const UserParams = ({ title }) => {
         }
 
         const res = await fetch(
-          `${API_PROFILES}${user}${API_MANAGER_ENDPOINT}`,
+          `${API_PROFILES}${userName}${API_MANAGER_ENDPOINT}`,
           {
             method: "GET",
-            headers: API_HEADERS,
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
             redirect: "follow",
           }
         );
@@ -56,7 +60,7 @@ const UserParams = ({ title }) => {
     setUserData(updateUserData);
   };
 
-  if (!user) {
+  if (!userName) {
     return null;
   }
 
@@ -65,7 +69,7 @@ const UserParams = ({ title }) => {
       {status === "loading" && <p>Loading...</p>}
       {status === "success" && (
         <DisplayUser
-          user={userData}
+          userData={userData}
           userBookings={userData.bookings}
           showVenuesLink={isManager === "true"}
           userVenues={isManager === "true" ? userData.venues : null}

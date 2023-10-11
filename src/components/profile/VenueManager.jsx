@@ -4,7 +4,7 @@ import dollar from "../../assets/icons/dollar-sign.svg";
 import users from "../../assets/icons/users.svg";
 
 import { useEffect, useState } from "react";
-import { API_BOOKINGS_TRUE, API_PROFILES, API_HEADERS } from "../utils/url";
+import { API_BOOKINGS_TRUE, API_PROFILES } from "../utils/url";
 import Facilities from "../common/Facilities";
 import EditVenueButton from "../common/EditVenueButton";
 import DeleteVenue from "../common/DeleteVenue";
@@ -23,7 +23,9 @@ const VenueManager = ({ user, token }) => {
 
         const res = await fetch(`${API_PROFILES}${user}${API_BOOKINGS_TRUE}`, {
           method: "GET",
-          headers: API_HEADERS,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           redirect: "follow",
         });
 

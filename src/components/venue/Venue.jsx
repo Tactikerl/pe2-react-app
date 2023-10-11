@@ -171,7 +171,7 @@ const Venue = ({ title }) => {
             <div className="col d-flex gap-3 m-2 justify-content-center">
               {/* add modal for delete button to confirm deletion */}
               <DeleteVenue id={venue.id} />
-              <EditVenueButton venueId={venue.id} />
+              <EditVenueButton id={venue.id} />
             </div>
           </div>
         )}
