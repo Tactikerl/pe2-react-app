@@ -1,5 +1,3 @@
-node version v16.17.0
-
 <h1 align="center">ProjectExam2_PE2_Karl-Kvammen_Readme</h1>
 
 <p align="center">This is my Project Exam for the fourth and last semester of FED(Front-end Development) at  Noroff. The exam took 7 weeks and i have tried to create a accommodation booking site following User Stories provided in the exam brief we received</p>
@@ -88,11 +86,7 @@ Planning Applications
 
 ### Prerequisites
 
-- npm@16.17.0
-
-```sh
-npm install npm@16.17.0 -g
-```
+- node version v16.17.0 (not required, but recommended)
 
 - LiveServer Extension (VSCode) or similar.
 
@@ -116,8 +110,8 @@ npm install
 npm run dev
 ```
 
-4.
-
 ## Usage
 
 To test and use the website the project should be running locally and you can now register a test user via the "Register" page using a <b>@stud.noroff.no</b> or <b>@noroff.no</b> email address, and a password containing at least 8 characters.
+
+User can now, depending on which type of user they have created, create, edit and delete venues and create bookings at other venues made by other users.

@@ -65,7 +65,7 @@ const UserParams = ({ title }) => {
   }
 
   return (
-    <div className="container">
+    <div className="container h-100">
       {status === "loading" && <p>Loading...</p>}
       {status === "success" && (
         <DisplayUser
