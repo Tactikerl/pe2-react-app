@@ -7,7 +7,7 @@ import UserIcon from "./UserIcon";
 const Layout = ({ children }) => {
   return (
     <div className="layout-container">
-      <header className="bg-blue  ">
+      <header className="shadow bg-blue">
         <div className="container justify-content-center">
           <div className="row g-0">
             <div className="col-md-2">

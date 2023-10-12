@@ -12,7 +12,7 @@ import Placeholder from "../../assets/img/placeholder.png";
 function DisplayVenues(props) {
   return (
     <Link className="text-decoration-none" to={`/venues/${props.id}`}>
-      <Card className="m-4">
+      <Card className="shadow m-4">
         <Row className="g-0">
           <Col lg={4} className="card-image">
             <img
